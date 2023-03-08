@@ -19,11 +19,11 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "TODO - Your title"
-abbrev: "TODO - Abbreviation"
-category: info
+title: "HTTP Identity Digest"
+abbrev: "HTTP Identity Digest"
+category: std
 
-docname: draft-todo-yourname-protocol-latest
+docname: draft-pardue-http-identity-digest-latest
 submissiontype: IETF  # also: "independent", "IAB", or "IRTF"
 number:
 date:
@@ -45,9 +45,9 @@ venue:
 
 author:
  -
-    fullname: Your Name Here
-    organization: Your Organization Here
-    email: your.email@example.com
+    fullname: Lucas Pardue 
+    organization: Cloudflare
+    email: lucaspardue.24.7@gmail.com
 
 normative:
 
