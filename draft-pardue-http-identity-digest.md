@@ -45,7 +45,7 @@ venue:
 
 author:
  -
-    fullname: Lucas Pardue 
+    fullname: Lucas Pardue
     organization: Cloudflare
     email: lucaspardue.24.7@gmail.com
 
