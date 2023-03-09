@@ -1,0 +1,83 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2023-03-09T01:00:58.693337+00:00",
+  "repo": "LPardue/draft-pardue-http-identity-digest",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [],
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOJGwozs5Liu29",
+      "title": "Initial spec",
+      "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/pull/1",
+      "state": "MERGED",
+      "author": "LPardue",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-03-08T06:23:08Z",
+      "updatedAt": "2023-03-08T06:35:46Z",
+      "baseRepository": "LPardue/draft-pardue-http-identity-digest",
+      "baseRefName": "main",
+      "baseRefOid": "4cf03686887ad0ff7b942fcb889a3869ec3b9567",
+      "headRepository": "LPardue/draft-pardue-http-identity-digest",
+      "headRefName": "init-innit",
+      "headRefOid": "0c1535692a792ae019c2a1f1c1b2eca146a1a313",
+      "closedAt": "2023-03-08T06:35:42Z",
+      "mergedAt": "2023-03-08T06:35:41Z",
+      "mergedBy": "LPardue",
+      "mergeCommit": {
+        "oid": "58191a459013337486a453a235aa983360202e6b"
+      },
+      "comments": [],
+      "reviews": []
+    }
+  ]
+}
