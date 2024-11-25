@@ -196,7 +196,7 @@ Range: bytes=0-10
 ~~~ http-message
 NOTE: '\' line wrapping per RFC 8792
 
-HTTP/1.1 200 OK
+HTTP/1.1 206 Partial Content
 Content-Encoding: gzip
 Content-Digest: \
   sha-256=:SotB7Pa5A7iHSBdh9mg1Ev/ktAzrxU4Z8ldcCIUyfI4=:
