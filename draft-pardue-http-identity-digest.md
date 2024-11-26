@@ -102,8 +102,8 @@ This document uses the Augmented BNF defined in {{!RFC5234}} and updated by
 {{!RFC7405}}. This includes the rules: LF (line feed)
 
 This document uses the following terminology from {{Section 3 of
-!STRUCTURED-FIELDS=RFC8941}} to specify syntax and parsing: Boolean, Byte
-Sequence, Dictionary, Integer, and List.
+!STRUCTURED-FIELDS=RFC9651}} to specify syntax and parsing: Byte Sequence,
+Dictionary, Integer, and List.
 
 The definitions "representation", "selected representation", "representation
 data", "representation metadata", "user agent" and "content" in this document
