@@ -47,8 +47,7 @@ fields for this purpose.
 
 # Introduction
 
-The Integrity fields defined in
-{{!DIGEST-FIELDS=I-D.draft-ietf-httpbis-digest-headers}} are suitable for a
+The Integrity fields defined in {{!DIGEST-FIELDS=RFC9530}} are suitable for a
 range of use cases. However, because the fields are subject to HTTP content
 coding considerations, it is difficult to support use cases that could benefit
 from the exchange of integrity digests of the unencoded representation.
