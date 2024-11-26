@@ -57,10 +57,11 @@ As a simple example, an application using HTTP might be presented with request
 or response representation data that has been transparently decoded.  Attempting
 to verify the integrity of the data against the Repr-Digest would first require
 re-encoding that data using the same coding indicated by the Content-Encoding
-header field ({{Section 8.4 of !HTTP=RFC9110}}).
+header field ({{Section 8.4 of !HTTP=RFC9110}}), which is not always possible
+(see {{Section 6.5 of DIGEST-FIELDS}}).
 
-Receiver-side re-encoding for the purpose of Repr-Digest validation is
-technically possible but it might not be practical for certain kinds of
+Even when receiver-side re-encoding for the purpose of Repr-Digest validation is
+technically possible, it might not be practical for certain kinds of
 environments. For instance, browsers tend to provide built-in support for
 transparent decoding but little support for encoding; while this could be done
 via the use of additional libraries it would create work in JavaScript that
