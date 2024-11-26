@@ -219,7 +219,8 @@ from the content coding concerns, it behaves similarly to Repr-Digest.
 Identity-Digest is a `Dictionary` (see {{Section 3.2 of STRUCTURED-FIELDS}})
 where each:
 
-* key conveys the hashing algorithm used to compute the digest;
+* key conveys the hashing algorithm (see {{Section 5 of DIGEST-FIELDS}} used to
+  compute the digest;
 * value is a `Byte Sequence` ({{Section 3.3.5 of STRUCTURED-FIELDS}}), that
   conveys an encoded version of the byte output produced by the digest
   calculation.
@@ -235,7 +236,10 @@ Identity-Digest: \
 ~~~
 
 The `Dictionary` type can be used, for example, to attach multiple digests
-calculated using different hashing algorithms.
+calculated using different hashing algorithms in order to support a population
+of endpoints with different or evolving capabilities. Such an approach could
+support transitions away from weaker algorithms (see
+{{Section 6.6 of DIGEST-FIELDS}}).
 
 ~~~ http-message
 NOTE: '\' line wrapping per RFC 8792
@@ -246,12 +250,15 @@ Identity-Digest: \
   yRZOtw8MjkM7iw7yZ/WkppmM44T3qg==:
 ~~~
 
-A recipient MAY ignore any or all digests. This allows the recipient to choose
-which hashing algorithm(s) to use for validation instead of verifying every
-digest.
+A recipient MAY ignore any or all digests. Application-specific behavior or
+local policy MAY set additional constraints on the processing and validation
+practices of the conveyed digests. The security considerations cover some of
+the issues related to ignoring digests (see {{Section 6.6 of DIGEST-FIELDS}})
+and validating multiple digests (see {{Section 6.7 of DIGEST-FIELDS}}).
 
 A sender MAY send a digest without knowing whether the recipient supports a
-given hashing algorithm, or even knowing that the recipient will ignore it.
+given hashing algorithm. A sender MAY send a digest if it knows the recipient
+will ignore it.
 
 Identity-Digest can be sent in a trailer section. In this case, Identity-Digest
 MAY be merged into the header section; see {{Section 6.5.1 of HTTP}}.
