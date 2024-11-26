@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-24T01:09:17.454512+00:00",
+  "timestamp": "2024-11-26T01:05:22.763239+00:00",
   "repo": "LPardue/draft-pardue-http-identity-digest",
   "labels": [
     {
@@ -84,25 +84,35 @@
       "id": "PR_kwDOJGwozs6BMjOr",
       "title": "Editorial: Change the status code of an example.",
       "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/pull/2",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "mikewest",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Range requests should return 206 responses, not 200.\r\n\r\nThey should also include headers like `Content-Range` and etc, but that seems like overkill for this example. The status code, however, seems like just the right amount of pedantry.",
       "createdAt": "2024-11-07T14:26:46Z",
-      "updatedAt": "2024-11-07T14:26:47Z",
+      "updatedAt": "2024-11-25T12:42:12Z",
       "baseRepository": "LPardue/draft-pardue-http-identity-digest",
       "baseRefName": "main",
       "baseRefOid": "58191a459013337486a453a235aa983360202e6b",
       "headRepository": "mikewest/draft-pardue-http-identity-digest",
       "headRefName": "patch-1",
       "headRefOid": "ca2bae210fce0129b19690972d2ee7ad2b587ef4",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2024-11-25T12:42:06Z",
+      "mergedAt": "2024-11-25T12:42:06Z",
+      "mergedBy": "LPardue",
+      "mergeCommit": {
+        "oid": "6be3bcfeccf34b30b05d2d331de080a93970bf96"
+      },
+      "comments": [
+        {
+          "author": "LPardue",
+          "authorAssociation": "OWNER",
+          "body": "whoops, thanks!",
+          "createdAt": "2024-11-25T12:42:10Z",
+          "updatedAt": "2024-11-25T12:42:10Z"
+        }
+      ],
       "reviews": []
     }
   ]
