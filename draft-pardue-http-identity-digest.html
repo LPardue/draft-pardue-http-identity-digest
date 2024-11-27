@@ -1197,9 +1197,10 @@ from the exchange of integrity digests of the unencoded representation.<a href="
 or response representation data that has been transparently decoded.  Attempting
 to verify the integrity of the data against the Repr-Digest would first require
 re-encoding that data using the same coding indicated by the Content-Encoding
-header field (<span><a href="https://rfc-editor.org/rfc/rfc9110#section-8.4" class="relref">Section 8.4</a> of [<a href="#HTTP" class="cite xref">HTTP</a>]</span>).<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">Receiver-side re-encoding for the purpose of Repr-Digest validation is
-technically possible but it might not be practical for certain kinds of
+header field (<span><a href="https://rfc-editor.org/rfc/rfc9110#section-8.4" class="relref">Section 8.4</a> of [<a href="#HTTP" class="cite xref">HTTP</a>]</span>), which is not always possible
+(see <span><a href="https://rfc-editor.org/rfc/rfc9530#section-6.5" class="relref">Section 6.5</a> of [<a href="#DIGEST-FIELDS" class="cite xref">DIGEST-FIELDS</a>]</span>).<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">Even when receiver-side re-encoding for the purpose of Repr-Digest validation is
+technically possible, it might not be practical for certain kinds of
 environments. For instance, browsers tend to provide built-in support for
 transparent decoding but little support for encoding; while this could be done
 via the use of additional libraries it would create work in JavaScript that

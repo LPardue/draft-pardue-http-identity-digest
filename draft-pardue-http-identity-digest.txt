@@ -93,19 +93,20 @@ Table of Contents
    transparently decoded.  Attempting to verify the integrity of the
    data against the Repr-Digest would first require re-encoding that
    data using the same coding indicated by the Content-Encoding header
-   field (Section 8.4 of [HTTP]).
+   field (Section 8.4 of [HTTP]), which is not always possible (see
+   Section 6.5 of [DIGEST-FIELDS]).
 
-   Receiver-side re-encoding for the purpose of Repr-Digest validation
-   is technically possible but it might not be practical for certain
-   kinds of environments.  For instance, browsers tend to provide built-
-   in support for transparent decoding but little support for encoding;
-   while this could be done via the use of additional libraries it would
-   create work in JavaScript that could contend with other activities.
-   Even on the server side, the re-encoding of received data might not
-   be acceptable; some coding algorithms are optimized towards efficient
-   decoding at the cost of complex encoding.  This is all made more
-   complex if the the Content-Encoding field value indicates a series of
-   encodings.
+   Even when receiver-side re-encoding for the purpose of Repr-Digest
+   validation is technically possible, it might not be practical for
+   certain kinds of environments.  For instance, browsers tend to
+   provide built-in support for transparent decoding but little support
+   for encoding; while this could be done via the use of additional
+   libraries it would create work in JavaScript that could contend with
+   other activities.  Even on the server side, the re-encoding of
+   received data might not be acceptable; some coding algorithms are
+   optimized towards efficient decoding at the cost of complex encoding.
+   This is all made more complex if the the Content-Encoding field value
+   indicates a series of encodings.
 
    A more complex example involves HTTP Range Requests (Section 14 of
    [HTTP]), where a client fetches multiple partial representations from
