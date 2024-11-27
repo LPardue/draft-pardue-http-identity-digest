@@ -4,8 +4,8 @@
 
 HyperText Transfer Protocol                                    L. Pardue
 Internet-Draft                                                Cloudflare
-Intended status: Standards Track                        25 November 2024
-Expires: 29 May 2025
+Intended status: Standards Track                        27 November 2024
+Expires: 31 May 2025
 
 
                           HTTP Identity Digest
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 May 2025.
+   This Internet-Draft will expire on 31 May 2025.
 
 Copyright Notice
 
@@ -339,11 +339,9 @@ Table of Contents
 8.  Normative References
 
    [DIGEST-FIELDS]
-              Polli, R. and L. Pardue, "Digest Fields", Work in
-              Progress, Internet-Draft, draft-ietf-httpbis-digest-
-              headers-13, 10 July 2023,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-
-              digest-headers-13>.
+              Polli, R. and L. Pardue, "Digest Fields", RFC 9530,
+              DOI 10.17487/RFC9530, February 2024,
+              <https://www.rfc-editor.org/rfc/rfc9530>.
 
    [HTTP]     Fielding, R., Ed., Nottingham, M., Ed., and J. Reschke,
               Ed., "HTTP Semantics", STD 97, RFC 9110,
