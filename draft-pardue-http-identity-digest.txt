@@ -145,8 +145,8 @@ Table of Contents
    by [RFC7405].  This includes the rules: LF (line feed)
 
    This document uses the following terminology from Section 3 of
-   [STRUCTURED-FIELDS] to specify syntax and parsing: Boolean, Byte
-   Sequence, Dictionary, Integer, and List.
+   [STRUCTURED-FIELDS] to specify syntax and parsing: Byte Sequence,
+   Dictionary, Integer, and List.
 
    The definitions "representation", "selected representation",
    "representation data", "representation metadata", "user agent" and
@@ -369,8 +369,8 @@ Table of Contents
 
    [STRUCTURED-FIELDS]
               Nottingham, M. and P. Kamp, "Structured Field Values for
-              HTTP", RFC 8941, DOI 10.17487/RFC8941, February 2021,
-              <https://www.rfc-editor.org/rfc/rfc8941>.
+              HTTP", RFC 9651, DOI 10.17487/RFC9651, September 2024,
+              <https://www.rfc-editor.org/rfc/rfc9651>.
 
 Acknowledgments
 

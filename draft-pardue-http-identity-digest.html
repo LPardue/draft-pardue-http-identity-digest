@@ -1240,8 +1240,8 @@ described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</s
 appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">This document uses the Augmented BNF defined in <span>[<a href="#RFC5234" class="cite xref">RFC5234</a>]</span> and updated by
 <span>[<a href="#RFC7405" class="cite xref">RFC7405</a>]</span>. This includes the rules: LF (line feed)<a href="#section-2-2" class="pilcrow">¶</a></p>
-<p id="section-2-3">This document uses the following terminology from <span><a href="https://rfc-editor.org/rfc/rfc8941#section-3" class="relref">Section 3</a> of [<a href="#STRUCTURED-FIELDS" class="cite xref">STRUCTURED-FIELDS</a>]</span> to specify syntax and parsing: Boolean, Byte
-Sequence, Dictionary, Integer, and List.<a href="#section-2-3" class="pilcrow">¶</a></p>
+<p id="section-2-3">This document uses the following terminology from <span><a href="https://rfc-editor.org/rfc/rfc9651#section-3" class="relref">Section 3</a> of [<a href="#STRUCTURED-FIELDS" class="cite xref">STRUCTURED-FIELDS</a>]</span> to specify syntax and parsing: Byte Sequence,
+Dictionary, Integer, and List.<a href="#section-2-3" class="pilcrow">¶</a></p>
 <p id="section-2-4">The definitions "representation", "selected representation", "representation
 data", "representation metadata", "user agent" and "content" in this document
 are to be interpreted as described in <span>[<a href="#HTTP" class="cite xref">HTTP</a>]</span>.<a href="#section-2-4" class="pilcrow">¶</a></p>
@@ -1379,14 +1379,14 @@ Identity-Digest: \
 communicate digests that are calculated using a hashing algorithm applied to the
 representation with no content coding (a.k.a. an identity encoding). Apart
 from the content coding concerns, it behaves similarly to Repr-Digest.<a href="#section-4-1" class="pilcrow">¶</a></p>
-<p id="section-4-2">Identity-Digest is a <code>Dictionary</code> (see <span><a href="https://rfc-editor.org/rfc/rfc8941#section-3.2" class="relref">Section 3.2</a> of [<a href="#STRUCTURED-FIELDS" class="cite xref">STRUCTURED-FIELDS</a>]</span>)
+<p id="section-4-2">Identity-Digest is a <code>Dictionary</code> (see <span><a href="https://rfc-editor.org/rfc/rfc9651#section-3.2" class="relref">Section 3.2</a> of [<a href="#STRUCTURED-FIELDS" class="cite xref">STRUCTURED-FIELDS</a>]</span>)
 where each:<a href="#section-4-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4-3.1">
           <p id="section-4-3.1.1">key conveys the hashing algorithm used to compute the digest;<a href="#section-4-3.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-4-3.2">
-          <p id="section-4-3.2.1">value is a <code>Byte Sequence</code> (<span><a href="https://rfc-editor.org/rfc/rfc8941#section-3.3.5" class="relref">Section 3.3.5</a> of [<a href="#STRUCTURED-FIELDS" class="cite xref">STRUCTURED-FIELDS</a>]</span>), that
+          <p id="section-4-3.2.1">value is a <code>Byte Sequence</code> (<span><a href="https://rfc-editor.org/rfc/rfc9651#section-3.3.5" class="relref">Section 3.3.5</a> of [<a href="#STRUCTURED-FIELDS" class="cite xref">STRUCTURED-FIELDS</a>]</span>), that
 conveys an encoded version of the byte output produced by the digest
 calculation.<a href="#section-4-3.2.1" class="pilcrow">¶</a></p>
 </li>
@@ -1444,7 +1444,7 @@ operate in addition to this specification.<a href="#section-5-3" class="pilcrow"
           <p id="section-5-5.1.1">key conveys the hashing algorithm;<a href="#section-5-5.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-5-5.2">
-          <p id="section-5-5.2.1">value is an <code>Integer</code> (<span><a href="https://rfc-editor.org/rfc/rfc8941#section-3.3.1" class="relref">Section 3.3.1</a> of [<a href="#STRUCTURED-FIELDS" class="cite xref">STRUCTURED-FIELDS</a>]</span>) that conveys an
+          <p id="section-5-5.2.1">value is an <code>Integer</code> (<span><a href="https://rfc-editor.org/rfc/rfc9651#section-3.3.1" class="relref">Section 3.3.1</a> of [<a href="#STRUCTURED-FIELDS" class="cite xref">STRUCTURED-FIELDS</a>]</span>) that conveys an
 ascending, relative, weighted preference. It must be in the range 0 to 10
 inclusive. 1 is the least preferred, 10 is the most preferred, and a value of
 0 means "not acceptable".<a href="#section-5-5.2.1" class="pilcrow">¶</a></p>
@@ -1508,7 +1508,7 @@ considerations.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 <dt id="STRUCTURED-FIELDS">[STRUCTURED-FIELDS]</dt>
     <dd>
-<span class="refAuthor">Nottingham, M.</span> and <span class="refAuthor">P. Kamp</span>, <span class="refTitle">"Structured Field Values for HTTP"</span>, <span class="seriesInfo">RFC 8941</span>, <span class="seriesInfo">DOI 10.17487/RFC8941</span>, <time datetime="2021-02" class="refDate">February 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8941">https://www.rfc-editor.org/rfc/rfc8941</a>&gt;</span>. </dd>
+<span class="refAuthor">Nottingham, M.</span> and <span class="refAuthor">P. Kamp</span>, <span class="refTitle">"Structured Field Values for HTTP"</span>, <span class="seriesInfo">RFC 9651</span>, <span class="seriesInfo">DOI 10.17487/RFC9651</span>, <time datetime="2024-09" class="refDate">September 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9651">https://www.rfc-editor.org/rfc/rfc9651</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
