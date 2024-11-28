@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-26T01:05:22.763239+00:00",
+  "timestamp": "2024-11-28T01:05:58.294897+00:00",
   "repo": "LPardue/draft-pardue-http-identity-digest",
   "labels": [
     {
@@ -49,7 +49,24 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 7,
+      "id": "I_kwDOJGwozs6gjHNF",
+      "title": "State-changing requests & `Content-Location`?",
+      "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/issues/7",
+      "state": "OPEN",
+      "author": "mikewest",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "How should `Identity-Digest` position itself [Sections 3.1](https://www.rfc-editor.org/rfc/rfc9530.html#section-3.1) and [3.2](https://www.rfc-editor.org/rfc/rfc9530.html#section-3.2) of DIGEST-FIELDS? Do the same considerations apply here that applied to `Repr-Digest`?",
+      "createdAt": "2024-11-26T07:34:41Z",
+      "updatedAt": "2024-11-26T07:34:41Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
   "pulls": [
     {
       "number": 1,
@@ -113,6 +130,116 @@
           "updatedAt": "2024-11-25T12:42:10Z"
         }
       ],
+      "reviews": []
+    },
+    {
+      "number": 3,
+      "id": "PR_kwDOJGwozs6DJFkI",
+      "title": "Editorial: Update `DIGEST-FIELDS` reference.",
+      "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/pull/3",
+      "state": "MERGED",
+      "author": "mikewest",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "RFC9530 was published! :)",
+      "createdAt": "2024-11-26T07:17:31Z",
+      "updatedAt": "2024-11-27T16:56:27Z",
+      "baseRepository": "LPardue/draft-pardue-http-identity-digest",
+      "baseRefName": "main",
+      "baseRefOid": "6be3bcfeccf34b30b05d2d331de080a93970bf96",
+      "headRepository": "mikewest/draft-pardue-http-identity-digest",
+      "headRefName": "patch-2",
+      "headRefOid": "5c75d72c465efe0a45e2f3e3dd117656e75803a1",
+      "closedAt": "2024-11-27T16:56:27Z",
+      "mergedAt": "2024-11-27T16:56:27Z",
+      "mergedBy": "LPardue",
+      "mergeCommit": {
+        "oid": "9a08005dbd8044f0047cf381ec3a2e1155c2aa9e"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 4,
+      "id": "PR_kwDOJGwozs6DJGpe",
+      "title": "Editorial: Update `STRUCTURED-FIELDS` reference.",
+      "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/pull/4",
+      "state": "MERGED",
+      "author": "mikewest",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "1. RFC9651 superseded RFC8941.\r\n2. It doesn't look like the term `Boolean` is used in the draft.",
+      "createdAt": "2024-11-26T07:19:25Z",
+      "updatedAt": "2024-11-27T16:57:57Z",
+      "baseRepository": "LPardue/draft-pardue-http-identity-digest",
+      "baseRefName": "main",
+      "baseRefOid": "6be3bcfeccf34b30b05d2d331de080a93970bf96",
+      "headRepository": "mikewest/draft-pardue-http-identity-digest",
+      "headRefName": "patch-3",
+      "headRefOid": "0e07e241ba66381fe15a9f21144e91beb1251cfa",
+      "closedAt": "2024-11-27T16:57:57Z",
+      "mergedAt": "2024-11-27T16:57:57Z",
+      "mergedBy": "LPardue",
+      "mergeCommit": {
+        "oid": "0c53020790fcdfe0ada0f69debfe13617fc11381"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 5,
+      "id": "PR_kwDOJGwozs6DJIHP",
+      "title": "Editorial: Strengthen the constraints.",
+      "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/pull/5",
+      "state": "MERGED",
+      "author": "mikewest",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As noted in DIGEST-FIELDS, re-encoding decoded content isn't always possible, and could require guessing at compression level settings or other configuration information that isn't available in either the request or response context.",
+      "createdAt": "2024-11-26T07:21:55Z",
+      "updatedAt": "2024-11-27T16:57:10Z",
+      "baseRepository": "LPardue/draft-pardue-http-identity-digest",
+      "baseRefName": "main",
+      "baseRefOid": "6be3bcfeccf34b30b05d2d331de080a93970bf96",
+      "headRepository": "mikewest/draft-pardue-http-identity-digest",
+      "headRefName": "patch-4",
+      "headRefOid": "aee4d4bc806f43d74381d00bbdeed6f09e712fe9",
+      "closedAt": "2024-11-27T16:57:10Z",
+      "mergedAt": "2024-11-27T16:57:10Z",
+      "mergedBy": "LPardue",
+      "mergeCommit": {
+        "oid": "b71fa1c42bd52672959922e9cf9a25f1702314ca"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 6,
+      "id": "PR_kwDOJGwozs6DJMqa",
+      "title": "Editorial: Porting language from DIGEST-FIELDS.",
+      "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/pull/6",
+      "state": "OPEN",
+      "author": "mikewest",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Aligning the `Identity-Digest` description with `Content-Digest` and `Repr-Digest` language from RFC9530.",
+      "createdAt": "2024-11-26T07:32:15Z",
+      "updatedAt": "2024-11-26T07:32:15Z",
+      "baseRepository": "LPardue/draft-pardue-http-identity-digest",
+      "baseRefName": "main",
+      "baseRefOid": "6be3bcfeccf34b30b05d2d331de080a93970bf96",
+      "headRepository": "mikewest/draft-pardue-http-identity-digest",
+      "headRefName": "patch-5",
+      "headRefOid": "582759ee99691f01cae3bae7288f97e45680e73f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
       "reviews": []
     }
   ]
