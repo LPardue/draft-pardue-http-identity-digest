@@ -4,8 +4,9 @@
 
 HyperText Transfer Protocol                                    L. Pardue
 Internet-Draft                                                Cloudflare
-Intended status: Standards Track                        27 November 2024
-Expires: 31 May 2025
+Intended status: Standards Track                                 M. West
+Expires: 9 June 2025                                              Google
+                                                         6 December 2024
 
 
                           HTTP Identity Digest
@@ -51,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 May 2025.
+   This Internet-Draft will expire on 9 June 2025.
 
 Copyright Notice
 
@@ -78,7 +79,7 @@ Table of Contents
    7.  IANA Considerations
    8.  Normative References
    Acknowledgments
-   Author's Address
+   Authors' Addresses
 
 1.  Introduction
 
@@ -380,8 +381,13 @@ Acknowledgments
    is motivated by discussion of the previous design in the HTTP WG.
    The motivating use cases still mostly apply identically.
 
-Author's Address
+Authors' Addresses
 
    Lucas Pardue
    Cloudflare
    Email: lucaspardue.24.7@gmail.com
+
+
+   Mike West
+   Google
+   Email: mkwst@google.com
