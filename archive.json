@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-05T01:07:49.141961+00:00",
+  "timestamp": "2024-12-08T01:12:43.084990+00:00",
   "repo": "LPardue/draft-pardue-http-identity-digest",
   "labels": [
     {
@@ -240,6 +240,42 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 8,
+      "id": "PR_kwDOJGwozs6EUpX2",
+      "title": "Adding myself as an editor.",
+      "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/pull/8",
+      "state": "MERGED",
+      "author": "mikewest",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As we discussed, I'd like to visibly help out.",
+      "createdAt": "2024-12-06T12:42:57Z",
+      "updatedAt": "2024-12-06T14:26:17Z",
+      "baseRepository": "LPardue/draft-pardue-http-identity-digest",
+      "baseRefName": "main",
+      "baseRefOid": "0c53020790fcdfe0ada0f69debfe13617fc11381",
+      "headRepository": "mikewest/draft-pardue-http-identity-digest",
+      "headRefName": "patch-6",
+      "headRefOid": "911c9c93f9808247d18c67357e36d57f168579b3",
+      "closedAt": "2024-12-06T14:05:23Z",
+      "mergedAt": "2024-12-06T14:05:23Z",
+      "mergedBy": "LPardue",
+      "mergeCommit": {
+        "oid": "ec73410d9f3d197b8e09084e0b6e1c019d0a54b5"
+      },
+      "comments": [
+        {
+          "author": "LPardue",
+          "authorAssociation": "OWNER",
+          "body": "Thanks!",
+          "createdAt": "2024-12-06T14:05:21Z",
+          "updatedAt": "2024-12-06T14:05:21Z"
+        }
+      ],
       "reviews": []
     }
   ]
