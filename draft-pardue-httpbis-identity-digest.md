@@ -207,42 +207,15 @@ Want-Identity-Digest: sha-256=1
 Want-Identity-Digest: sha-512=3, sha-256=10, unixsum=0
 ~~~
 
-# Complementary Integrity Fields
+# Integrity Fields are Complementary
 
-The following examples illustrate how Integrity fields can be used in
-combination to address different and complementary needs, particularly the cases
-described in {{introduction}}. The unencoded data used in the example is the
-string "An unexceptional string" following by an LF.
+Integrity fields can be used in combination to address different and
+complementary needs, particularly the cases described in {{introduction}}.
 
-When a response message is not conveying partial or encoded representation data,
-all Integrity fields contain the same value, making validation trivial and
-identical.
+In the following examples, the unencoded response data is the string "An
+unexceptional string" following by an LF.
 
-~~~ http-message
-GET /boringstring HTTP/1.1
-Host: example.org
-
-~~~
-{: title="Simple GET request"}
-
-~~~ http-message
-NOTE: '\' line wrapping per RFC 8792
-
-HTTP/1.1 200 OK
-Content-Length: 24
-Content-Digest: \
-  sha-256=:5Bv3NIx05BPnh0jMph6v1RJ5Q7kl9LKMtQxmvc9+Z7Y=:
-Repr-Digest: \
-  sha-256=:5Bv3NIx05BPnh0jMph6v1RJ5Q7kl9LKMtQxmvc9+Z7Y=:
-Identity-Digest: \
-  sha-256=:5Bv3NIx05BPnh0jMph6v1RJ5Q7kl9LKMtQxmvc9+Z7Y=:
-
-An unexceptional string
-~~~
-{: title="Response to GET request"}
-
-When a response message conveys complete encoded content, the `Content-Digest`
-and the `Repr-Digest` are the same, while the `Identity-Digest` is different.
+The first example demonstrates a request that uses content negotiation.
 
 ~~~ http-message
 GET /boringstring HTTP/1.1
@@ -252,13 +225,14 @@ Accept-Encoding: gzip
 ~~~
 {: title="GET request with content negotiation"}
 
+The server responds with the full GZIP-encoded representation. The `Repr-Digest`
+and `Identity-Digest` therefore differ.
+
 ~~~ http-message
 NOTE: '\' line wrapping per RFC 8792
 
 HTTP/1.1 200 OK
 Content-Encoding: gzip
-Content-Digest: \
-  sha-256=:XyjvEuFb1P5rqc2le3vQm7M96DwZhvmOwqHLu2xVpY4=:
 Repr-Digest: \
   sha-256=:XyjvEuFb1P5rqc2le3vQm7M96DwZhvmOwqHLu2xVpY4=:
 Identity-Digest: \
@@ -269,15 +243,11 @@ Identity-Digest: \
 28 c9 cc cf 4b cc 51 28 2e 29
 ca cc 4b e7 02 00 7e af 07 44
 18 00 00 00
-~~~
-{: title="Response with gzip encoding"}
 
-Finally, when a response message contains partial and encoded content, all
-Integrity fields vary. The `Content-Digest` can be used to validate the
-integrity of the received part. `Repr-Digest` or `Identity-Digest` can be used
-later after reconstruction, the choice of which to use is left to the
-application, which would consider a range of factors outside the scope of
-discussion.
+~~~
+{: title="GET response with GZIP-encoded content"}
+
+The second example demonstrates a range request with content negotiation
 
 ~~~ http-message
 GET /boringstring HTTP/1.1
@@ -288,11 +258,20 @@ Range: bytes=0-10
 ~~~
 {: title="Range request with content negotiation"}
 
+The server responds with a 206 Partial Content response using GZIP encoding, it
+has three different Integrity fields. The `Content-Digest` relates to the
+response message content that can be used to validate the integrity of the
+received part. `Repr-Digest` and `Identity-Digest` can be used later once the
+entire object is reconstructed. The choice of which to use is left to the
+application that would consider a range of factors outside the scope of
+this document.
+
 ~~~ http-message
 NOTE: '\' line wrapping per RFC 8792
 
 HTTP/1.1 206 Partial Content
 Content-Encoding: gzip
+Content-Range: bytes 0-9/44
 Content-Digest: \
   sha-256=:SotB7Pa5A7iHSBdh9mg1Ev/ktAzrxU4Z8ldcCIUyfI4=:
 Repr-Digest: \
@@ -302,7 +281,7 @@ Identity-Digest: \
 
 1f 8b 08 00 79 1f 08 64 00 ff
 ~~~
-{: title="Partial response with gzip encoding"}
+{: title="Partial response with GZIP encoding"}
 
 
 # Security Considerations
