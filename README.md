@@ -2,10 +2,10 @@
 
 This is the working area for the individual Internet-Draft, "HTTP Identity Digest".
 
-* [Editor's Copy](https://LPardue.github.io/draft-pardue-http-identity-digest/#go.draft-pardue-http-identity-digest.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-pardue-http-identity-digest)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-pardue-http-identity-digest)
-* [Compare Editor's Copy to Individual Draft](https://LPardue.github.io/draft-pardue-http-identity-digest/#go.draft-pardue-http-identity-digest.diff)
+* [Editor's Copy](https://LPardue.github.io/draft-pardue-http-identity-digest/#go.draft-pardue-httpbis-identity-digest.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-pardue-httpbis-identity-digest)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-pardue-httpbis-identity-digest)
+* [Compare Editor's Copy to Individual Draft](https://LPardue.github.io/draft-pardue-http-identity-digest/#go.draft-pardue-httpbis-identity-digest.diff)
 
 
 ## Contributing
