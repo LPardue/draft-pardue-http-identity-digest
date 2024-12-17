@@ -1364,11 +1364,11 @@ Want-Identity-Digest: sha-512=3, sha-256=10, unixsum=0
       <h2 id="name-messages-containing-both-id">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-messages-containing-both-id" class="section-name selfRef">Messages containing both Identity-Digest and Content-Encoding</a>
       </h2>
-<p id="section-5-1"><code>Identity-Digest</code> applies to the unencoded representation. If a message is
+<p id="section-5-1">Digests delivered through <code>Identity-Digest</code> apply to the unencoded representation. If a message is
 received with content coding, a recipient needs to decode the message in order
 to calculate the digest that can subsequently be used for validation. If
 multiple content codings are applied, the recipient needs to decode all
-encodings before usage.<a href="#section-5-1" class="pilcrow">¶</a></p>
+encodings in order before validation.<a href="#section-5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="complementary-integrity-fields">
