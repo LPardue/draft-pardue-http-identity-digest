@@ -1173,7 +1173,7 @@ fields for this purpose.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-the-want-identity-digest-fi" class="internal xref">The Want-Identity-Digest Field</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-complementary-integrity-fie" class="internal xref">Complementary Integrity Fields</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-integrity-fields-are-comple" class="internal xref">Integrity Fields are Complementary</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
@@ -1356,53 +1356,18 @@ Want-Identity-Digest: sha-512=3, sha-256=10, unixsum=0
 </div>
 </section>
 </div>
-<div id="complementary-integrity-fields">
+<div id="integrity-fields-are-complementary">
 <section id="section-5">
-      <h2 id="name-complementary-integrity-fie">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-complementary-integrity-fie" class="section-name selfRef">Complementary Integrity Fields</a>
+      <h2 id="name-integrity-fields-are-comple">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-integrity-fields-are-comple" class="section-name selfRef">Integrity Fields are Complementary</a>
       </h2>
-<p id="section-5-1">The following examples illustrate how Integrity fields can be used in
-combination to address different and complementary needs, particularly the cases
-described in <a href="#introduction" class="auto internal xref">Section 1</a>. The unencoded data used in the example is the
-string "An unexceptional string" following by an LF.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">When a response message is not conveying partial or encoded representation data,
-all Integrity fields contain the same value, making validation trivial and
-identical.<a href="#section-5-2" class="pilcrow">¶</a></p>
-<span id="name-simple-get-request"></span><figure id="figure-1">
-        <div class="lang-http-message sourcecode" id="section-5-3.1">
-<pre>
-GET /boringstring HTTP/1.1
-Host: example.org
-
-</pre>
-</div>
-<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
-<a href="#name-simple-get-request" class="selfRef">Simple GET request</a>
-        </figcaption></figure>
-<span id="name-response-to-get-request"></span><figure id="figure-2">
+<p id="section-5-1">Integrity fields can be used in combination to address different and
+complementary needs, particularly the cases described in <a href="#introduction" class="auto internal xref">Section 1</a>.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">In the following examples, the unencoded response data is the string "An
+unexceptional string" following by an LF.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">The first example demonstrates a request that uses content negotiation.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<span id="name-get-request-with-content-ne"></span><figure id="figure-1">
         <div class="lang-http-message sourcecode" id="section-5-4.1">
-<pre>
-NOTE: '\' line wrapping per RFC 8792
-
-HTTP/1.1 200 OK
-Content-Length: 24
-Content-Digest: \
-  sha-256=:5Bv3NIx05BPnh0jMph6v1RJ5Q7kl9LKMtQxmvc9+Z7Y=:
-Repr-Digest: \
-  sha-256=:5Bv3NIx05BPnh0jMph6v1RJ5Q7kl9LKMtQxmvc9+Z7Y=:
-Identity-Digest: \
-  sha-256=:5Bv3NIx05BPnh0jMph6v1RJ5Q7kl9LKMtQxmvc9+Z7Y=:
-
-An unexceptional string
-</pre>
-</div>
-<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
-<a href="#name-response-to-get-request" class="selfRef">Response to GET request</a>
-        </figcaption></figure>
-<p id="section-5-5">When a response message conveys complete encoded content, the <code>Content-Digest</code>
-and the <code>Repr-Digest</code> are the same, while the <code>Identity-Digest</code> is different.<a href="#section-5-5" class="pilcrow">¶</a></p>
-<span id="name-get-request-with-content-ne"></span><figure id="figure-3">
-        <div class="lang-http-message sourcecode" id="section-5-6.1">
 <pre>
 GET /boringstring HTTP/1.1
 Host: example.org
@@ -1410,18 +1375,18 @@ Accept-Encoding: gzip
 
 </pre>
 </div>
-<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
 <a href="#name-get-request-with-content-ne" class="selfRef">GET request with content negotiation</a>
         </figcaption></figure>
-<span id="name-response-with-gzip-encoding"></span><figure id="figure-4">
-        <div class="lang-http-message sourcecode" id="section-5-7.1">
+<p id="section-5-5">The server responds with the full GZIP-encoded representation. The <code>Repr-Digest</code>
+and <code>Identity-Digest</code> therefore differ.<a href="#section-5-5" class="pilcrow">¶</a></p>
+<span id="name-get-response-with-gzip-enco"></span><figure id="figure-2">
+        <div class="lang-http-message sourcecode" id="section-5-6.1">
 <pre>
 NOTE: '\' line wrapping per RFC 8792
 
 HTTP/1.1 200 OK
 Content-Encoding: gzip
-Content-Digest: \
-  sha-256=:XyjvEuFb1P5rqc2le3vQm7M96DwZhvmOwqHLu2xVpY4=:
 Repr-Digest: \
   sha-256=:XyjvEuFb1P5rqc2le3vQm7M96DwZhvmOwqHLu2xVpY4=:
 Identity-Digest: \
@@ -1432,19 +1397,15 @@ Identity-Digest: \
 28 c9 cc cf 4b cc 51 28 2e 29
 ca cc 4b e7 02 00 7e af 07 44
 18 00 00 00
+
 </pre>
 </div>
-<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
-<a href="#name-response-with-gzip-encoding" class="selfRef">Response with gzip encoding</a>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-get-response-with-gzip-enco" class="selfRef">GET response with GZIP-encoded content</a>
         </figcaption></figure>
-<p id="section-5-8">Finally, when a response message contains partial and encoded content, all
-Integrity fields vary. The <code>Content-Digest</code> can be used to validate the
-integrity of the received part. <code>Repr-Digest</code> or <code>Identity-Digest</code> can be used
-later after reconstruction, the choice of which to use is left to the
-application, which would consider a range of factors outside the scope of
-discussion.<a href="#section-5-8" class="pilcrow">¶</a></p>
-<span id="name-range-request-with-content-"></span><figure id="figure-5">
-        <div class="lang-http-message sourcecode" id="section-5-9.1">
+<p id="section-5-7">The second example demonstrates a range request with content negotiation.<a href="#section-5-7" class="pilcrow">¶</a></p>
+<span id="name-range-request-with-content-"></span><figure id="figure-3">
+        <div class="lang-http-message sourcecode" id="section-5-8.1">
 <pre>
 GET /boringstring HTTP/1.1
 Host: example.org
@@ -1453,16 +1414,24 @@ Range: bytes=0-10
 
 </pre>
 </div>
-<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
 <a href="#name-range-request-with-content-" class="selfRef">Range request with content negotiation</a>
         </figcaption></figure>
-<span id="name-partial-response-with-gzip-"></span><figure id="figure-6">
+<p id="section-5-9">The server responds with a 206 Partial Content response using GZIP encoding, it
+has three different Integrity fields. The <code>Content-Digest</code> relates to the
+response message content that can be used to validate the integrity of the
+received part. <code>Repr-Digest</code> and <code>Identity-Digest</code> can be used later once the
+entire object is reconstructed. The choice of which to use is left to the
+application that would consider a range of factors outside the scope of
+this document.<a href="#section-5-9" class="pilcrow">¶</a></p>
+<span id="name-partial-response-with-gzip-"></span><figure id="figure-4">
         <div class="lang-http-message sourcecode" id="section-5-10.1">
 <pre>
 NOTE: '\' line wrapping per RFC 8792
 
 HTTP/1.1 206 Partial Content
 Content-Encoding: gzip
+Content-Range: bytes 0-9/44
 Content-Digest: \
   sha-256=:SotB7Pa5A7iHSBdh9mg1Ev/ktAzrxU4Z8ldcCIUyfI4=:
 Repr-Digest: \
@@ -1473,8 +1442,8 @@ Identity-Digest: \
 1f 8b 08 00 79 1f 08 64 00 ff
 </pre>
 </div>
-<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
-<a href="#name-partial-response-with-gzip-" class="selfRef">Partial response with gzip encoding</a>
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<a href="#name-partial-response-with-gzip-" class="selfRef">Partial response with GZIP encoding</a>
         </figcaption></figure>
 </section>
 </div>
