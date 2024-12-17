@@ -285,7 +285,7 @@ Table of Contents
               Figure 2: GET response with GZIP-encoded content
 
    The second example demonstrates a range request with content
-   negotiation
+   negotiation.
 
    GET /boringstring HTTP/1.1
    Host: example.org
