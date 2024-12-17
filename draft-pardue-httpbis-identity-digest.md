@@ -3,23 +3,24 @@ title: "HTTP Identity Digest"
 abbrev: "HTTP Identity Digest"
 category: std
 
-docname: draft-pardue-http-identity-digest-latest
+docname: draft-pardue-httpbis-identity-digest-latest
 submissiontype: IETF
 number:
 date:
-consensus: true
+
 v: 3
 area: "Applications"
-workgroup: "HyperText Transfer Protocol"
+workgroup: HTTP
 keyword:
  - next generation
  - unicorn
  - sparkling distributed ledger
 venue:
-  group: "HyperText Transfer Protocol"
-  type: "Working Group"
-  mail: "http-wg@hplb.hp.com"
-  arch: "https://www.ics.uci.edu/pub/ietf/http/hypermail"
+  group: HTTP
+  type: Working Group
+  home: https://httpwg.org/
+  mail: ietf-http-wg@w3.org
+  arch: https://lists.w3.org/Archives/Public/
   github: "LPardue/draft-pardue-http-identity-digest"
   latest: "https://LPardue.github.io/draft-pardue-http-identity-digest/draft-pardue-http-identity-digest.html"
 
