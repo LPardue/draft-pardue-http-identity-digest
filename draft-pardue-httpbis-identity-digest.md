@@ -52,10 +52,11 @@ fields for this purpose.
 
 # Introduction
 
-The Integrity fields defined in {{!DIGEST-FIELDS=RFC9530}} are suitable for a
-range of use cases. However, because the fields are subject to HTTP content
-coding considerations, it is difficult to support use cases that could benefit
-from the exchange of integrity digests of the unencoded representation.
+The Repr-Digest and Content-Digest integrity fields integrity fields defined in
+{{!DIGEST-FIELDS=RFC9530}} are suitable for a range of use cases. However,
+because the fields are subject to HTTP content coding considerations, it is
+difficult to support use cases that could benefit from the exchange of integrity
+digests of the unencoded representation.
 
 As a simple example, an application using HTTP might be presented with request
 or response representation data that has been transparently decoded.  Attempting
@@ -64,16 +65,15 @@ re-encoding that data using the same coding indicated by the Content-Encoding
 header field ({{Section 8.4 of !HTTP=RFC9110}}), which is not always possible
 (see {{Section 6.5 of DIGEST-FIELDS}}).
 
-Even when receiver-side re-encoding for the purpose of Repr-Digest validation is
-technically possible, it might not be practical for certain kinds of
+Although receivers could feasibly re-encode data in order to carry out
+Repr-Digest validation, it might be impractical for certain kinds of
 environments. For instance, browsers tend to provide built-in support for
 transparent decoding but little support for encoding; while this could be done
 via the use of additional libraries it would create work in JavaScript that
 could contend with other activities. Even on the server side, the re-encoding of
 received data might not be acceptable; some coding algorithms are optimized
-towards efficient decoding at the cost of complex encoding. This is all made
-more complex if the the Content-Encoding field value indicates a series of
-encodings.
+towards efficient decoding at the cost of complex encoding. A Content-Encoding
+field value that indicates a series of encodings adds further complexity.
 
 A more complex example involves HTTP Range Requests ({{Section 14 of
 HTTP}}), where a client fetches multiple partial representations from
