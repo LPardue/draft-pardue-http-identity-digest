@@ -1199,26 +1199,26 @@ fields for this purpose.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">The Integrity fields defined in <span>[<a href="#DIGEST-FIELDS" class="cite xref">DIGEST-FIELDS</a>]</span> are suitable for a
-range of use cases. However, because the fields are subject to HTTP content
-coding considerations, it is difficult to support use cases that could benefit
-from the exchange of integrity digests of the unencoded representation.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">The Repr-Digest and Content-Digest integrity fields integrity fields defined in
+<span>[<a href="#DIGEST-FIELDS" class="cite xref">DIGEST-FIELDS</a>]</span> are suitable for a range of use cases. However,
+because the fields are subject to HTTP content coding considerations, it is
+difficult to support use cases that could benefit from the exchange of integrity
+digests of the unencoded representation.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">As a simple example, an application using HTTP might be presented with request
 or response representation data that has been transparently decoded.  Attempting
 to verify the integrity of the data against the Repr-Digest would first require
 re-encoding that data using the same coding indicated by the Content-Encoding
 header field (<span><a href="https://rfc-editor.org/rfc/rfc9110#section-8.4" class="relref">Section 8.4</a> of [<a href="#HTTP" class="cite xref">HTTP</a>]</span>), which is not always possible
 (see <span><a href="https://rfc-editor.org/rfc/rfc9530#section-6.5" class="relref">Section 6.5</a> of [<a href="#DIGEST-FIELDS" class="cite xref">DIGEST-FIELDS</a>]</span>).<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">Even when receiver-side re-encoding for the purpose of Repr-Digest validation is
-technically possible, it might not be practical for certain kinds of
+<p id="section-1-3">Although receivers could feasibly re-encode data in order to carry out
+Repr-Digest validation, it might be impractical for certain kinds of
 environments. For instance, browsers tend to provide built-in support for
 transparent decoding but little support for encoding; while this could be done
 via the use of additional libraries it would create work in JavaScript that
 could contend with other activities. Even on the server side, the re-encoding of
 received data might not be acceptable; some coding algorithms are optimized
-towards efficient decoding at the cost of complex encoding. This is all made
-more complex if the the Content-Encoding field value indicates a series of
-encodings.<a href="#section-1-3" class="pilcrow">¶</a></p>
+towards efficient decoding at the cost of complex encoding. A Content-Encoding
+field value that indicates a series of encodings adds further complexity.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">A more complex example involves HTTP Range Requests (<span><a href="https://rfc-editor.org/rfc/rfc9110#section-14" class="relref">Section 14</a> of [<a href="#HTTP" class="cite xref">HTTP</a>]</span>), where a client fetches multiple partial representations from
 different origins and "stitches" them back into a whole. Unfortunately, if the
 origins apply different content coding, the Repr-Digest field will vary by the
