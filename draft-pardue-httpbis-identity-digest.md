@@ -22,13 +22,13 @@ venue:
   mail: ietf-http-wg@w3.org
   arch: https://lists.w3.org/Archives/Public/
   github: "LPardue/draft-pardue-http-identity-digest"
-  latest: "https://LPardue.github.io/draft-pardue-http-identity-digest/draft-pardue-http-identity-digest.html"
+  latest: "https://LPardue.github.io/draft-pardue-http-identity-digest/draft-pardue-httpbis-identity-digest.html"
 
 author:
  -
     fullname: Lucas Pardue
     organization: Cloudflare
-    email: lucaspardue.24.7@gmail.com
+    email: lucas@lucaspardue.com
  -
     fullname: Mike West
     organization: Google
