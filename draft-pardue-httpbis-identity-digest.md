@@ -123,7 +123,7 @@ Integrity preference fields: collective term for `Want-Repr-Digest`,  `Want-Cont
 The following examples illustrate how Integrity fields can be used in
 combination to address different and complementary needs, particularly the cases
 described in {{introduction}}. The unencoded data used in the example is the
-string "An unexceptional string" following by an LF character.
+string "An unexceptional string" following by an LF.
 
 When a response message is not conveying partial or encoded representation data,
 all Integrity fields contain the same value, making validation trivial and
