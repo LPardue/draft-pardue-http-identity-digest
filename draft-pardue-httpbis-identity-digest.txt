@@ -2,7 +2,7 @@
 
 
 
-HyperText Transfer Protocol                                    L. Pardue
+HTTP                                                           L. Pardue
 Internet-Draft                                                Cloudflare
 Intended status: Standards Track                                 M. West
 Expires: 20 June 2025                                             Google
@@ -10,7 +10,7 @@ Expires: 20 June 2025                                             Google
 
 
                           HTTP Identity Digest
-                draft-pardue-http-identity-digest-latest
+              draft-pardue-httpbis-identity-digest-latest
 
 Abstract
 
@@ -28,11 +28,12 @@ About This Document
    https://LPardue.github.io/draft-pardue-http-identity-digest/draft-
    pardue-http-identity-digest.html.  Status information for this
    document may be found at https://datatracker.ietf.org/doc/draft-
-   pardue-http-identity-digest/.
+   pardue-httpbis-identity-digest/.
 
-   Discussion of this document takes place on the HyperText Transfer
-   Protocol Working Group mailing list (mailto:http-wg@hplb.hp.com),
-   which is archived at https://www.ics.uci.edu/pub/ietf/http/hypermail.
+   Discussion of this document takes place on the HTTP Working Group
+   mailing list (mailto:ietf-http-wg@w3.org), which is archived at
+   https://lists.w3.org/Archives/Public/.  Working Group information can
+   be found at https://httpwg.org/.
 
    Source for this draft and an issue tracker can be found at
    https://github.com/LPardue/draft-pardue-http-identity-digest.
