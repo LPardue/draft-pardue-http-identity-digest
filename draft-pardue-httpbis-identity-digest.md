@@ -52,7 +52,7 @@ fields for this purpose.
 
 # Introduction
 
-The Repr-Digest and Content-Digest integrity fields integrity fields defined in
+The `Repr-Digest` and `Content-Digest` integrity fields integrity fields defined in
 {{!DIGEST-FIELDS=RFC9530}} are suitable for a range of use cases. However,
 because the fields are subject to HTTP content coding considerations, it is
 difficult to support use cases that could benefit from the exchange of integrity
@@ -60,13 +60,13 @@ digests of the unencoded representation.
 
 As a simple example, an application using HTTP might be presented with request
 or response representation data that has been transparently decoded.  Attempting
-to verify the integrity of the data against the Repr-Digest would first require
+to verify the integrity of the data against the `Repr-Digest` would first require
 re-encoding that data using the same coding indicated by the Content-Encoding
 header field ({{Section 8.4 of !HTTP=RFC9110}}), which is not always possible
 (see {{Section 6.5 of DIGEST-FIELDS}}).
 
 Although receivers could feasibly re-encode data in order to carry out
-Repr-Digest validation, it might be impractical for certain kinds of
+`Repr-Digest` validation, it might be impractical for certain kinds of
 environments. For instance, browsers tend to provide built-in support for
 transparent decoding but little support for encoding; while this could be done
 via the use of additional libraries it would create work in JavaScript that
@@ -78,12 +78,12 @@ field value that indicates a series of encodings adds further complexity.
 A more complex example involves HTTP Range Requests ({{Section 14 of
 HTTP}}), where a client fetches multiple partial representations from
 different origins and "stitches" them back into a whole. Unfortunately, if the
-origins apply different content coding, the Repr-Digest field will vary by the
+origins apply different content coding, the `Repr-Digest` field will vary by the
 server's selected encoding (i.e. the Content-Encoding header field, {{Section
 8.4 of HTTP}}). This provides a challenge for a client - in order to verify the
 integrity of the pieced-together whole it would need to remove the encoding of
 each part, combine them, and then encode the result in order to compare against
-one or more Repr-Digests.
+one or more `Repr-Digest`s.
 
 The Accept-Encoding header field ({{Section 12.5.3 of HTTP}}) provides the means
 to indicate preferences for content coding. It is possible for an endpoint to
@@ -108,120 +108,27 @@ This document uses the Augmented BNF defined in {{!RFC5234}} and updated by
 
 This document uses the following terminology from {{Section 3 of
 !STRUCTURED-FIELDS=RFC9651}} to specify syntax and parsing: Byte Sequence,
-Dictionary, Integer, and List.
+Dictionary, and Integer.
 
 The definitions "representation", "selected representation", "representation
-data", "representation metadata", "user agent" and "content" in this document
-are to be interpreted as described in {{!HTTP=RFC9110}}.
+data", "representation metadata", and "content" in this document are to be
+interpreted as described in {{!HTTP=RFC9110}}.
 
-Integrity fields: collective term for `Content-Digest`, `Repr-Digest`, and `Identity-Digest`
+"Integrity fields" is the collective term for `Content-Digest`, `Repr-Digest`,
+and `Identity-Digest`
 
-Integrity preference fields: collective term for `Want-Repr-Digest`,  `Want-Content-Digest`, and `Want-Identity-Digest`
-
-# Complementary Integrity Fields
-
-The following examples illustrate how Integrity fields can be used in
-combination to address different and complementary needs, particularly the cases
-described in {{introduction}}. The unencoded data used in the example is the
-string "An unexceptional string" following by an LF.
-
-When a response message is not conveying partial or encoded representation data,
-all Integrity fields contain the same value, making validation trivial and
-identical.
-
-~~~ http-message
-GET /boringstring HTTP/1.1
-Host: example.org
-
-~~~
-{: title="Simple GET request"}
-
-~~~ http-message
-NOTE: '\' line wrapping per RFC 8792
-
-HTTP/1.1 200 OK
-Content-Length: 24
-Content-Digest: \
-  sha-256=:5Bv3NIx05BPnh0jMph6v1RJ5Q7kl9LKMtQxmvc9+Z7Y=:
-Repr-Digest: \
-  sha-256=:5Bv3NIx05BPnh0jMph6v1RJ5Q7kl9LKMtQxmvc9+Z7Y=:
-Identity-Digest: \
-  sha-256=:5Bv3NIx05BPnh0jMph6v1RJ5Q7kl9LKMtQxmvc9+Z7Y=:
-
-An unexceptional string
-~~~
-{: title="Response to GET request"}
-
-When a response message conveys complete encoded content, the Content-Digest and
-the Repr-Digest are the same, while the Identity-Digest is different.
-
-~~~ http-message
-GET /boringstring HTTP/1.1
-Host: example.org
-Accept-Encoding: gzip
-
-~~~
-{: title="GET request with content negotiation"}
-
-~~~ http-message
-NOTE: '\' line wrapping per RFC 8792
-
-HTTP/1.1 200 OK
-Content-Encoding: gzip
-Content-Digest: \
-  sha-256=:XyjvEuFb1P5rqc2le3vQm7M96DwZhvmOwqHLu2xVpY4=:
-Repr-Digest: \
-  sha-256=:XyjvEuFb1P5rqc2le3vQm7M96DwZhvmOwqHLu2xVpY4=:
-Identity-Digest: \
-  sha-256=:5Bv3NIx05BPnh0jMph6v1RJ5Q7kl9LKMtQxmvc9+Z7Y=:
-
-1f 8b 08 00 79 1f 08 64 00 ff
-73 cc 53 28 cd 4b ad 48 4e 2d
-28 c9 cc cf 4b cc 51 28 2e 29
-ca cc 4b e7 02 00 7e af 07 44
-18 00 00 00
-~~~
-{: title="Response with gzip encoding"}
-
-Finally, when a response message contains partial and encoded content, all
-Integrity fields vary. The Content-Digest can be used to validate the integrity
-of the received part. Repr-Digest or Identity-Digest can be used later after
-reconstruction, the choice of which to use is left to the application, which
-would consider a range of factors outside the scope of discussion.
-
-~~~ http-message
-GET /boringstring HTTP/1.1
-Host: example.org
-Accept-Encoding: gzip
-Range: bytes=0-10
-
-~~~
-{: title="Range request with content negotiation"}
-
-~~~ http-message
-NOTE: '\' line wrapping per RFC 8792
-
-HTTP/1.1 206 Partial Content
-Content-Encoding: gzip
-Content-Digest: \
-  sha-256=:SotB7Pa5A7iHSBdh9mg1Ev/ktAzrxU4Z8ldcCIUyfI4=:
-Repr-Digest: \
-  sha-256=:XyjvEuFb1P5rqc2le3vQm7M96DwZhvmOwqHLu2xVpY4=:
-Identity-Digest: \
-  sha-256=:5Bv3NIx05BPnh0jMph6v1RJ5Q7kl9LKMtQxmvc9+Z7Y=:
-
-1f 8b 08 00 79 1f 08 64 00 ff
-~~~
-{: title="Partial response with gzip encoding"}
+"Integrity preference fields" is the collective term for `Want-Repr-Digest`,
+`Want-Content-Digest`, and `Want-Identity-Digest`
 
 # The Identity-Digest Field {#identity-digest}
 
-The Identity-Digest HTTP field can be used in requests and responses to
+The `Identity-Digest` HTTP field can be used in requests and responses to
 communicate digests that are calculated using a hashing algorithm applied to the
-representation with no content coding (a.k.a. an identity encoding). Apart
-from the content coding concerns, it behaves similarly to Repr-Digest.
+representation with no content coding ({{Section 8.4.1 of HTTP}}). Apart from
+the content coding concerns, it behaves similarly to `Repr-Digest` ({{Section 3 of
+DIGEST-FIELDS}}).
 
-Identity-Digest is a `Dictionary` (see {{Section 3.2 of STRUCTURED-FIELDS}})
+`Identity-Digest` is a `Dictionary` (see {{Section 3.2 of STRUCTURED-FIELDS}})
 where each:
 
 * key conveys the hashing algorithm (see {{Section 5 of DIGEST-FIELDS}} used to
@@ -265,26 +172,27 @@ A sender MAY send a digest without knowing whether the recipient supports a
 given hashing algorithm. A sender MAY send a digest if it knows the recipient
 will ignore it.
 
-Identity-Digest can be sent in a trailer section. In this case, Identity-Digest
-MAY be merged into the header section; see {{Section 6.5.1 of HTTP}}.
+`Identity-Digest` can be sent in a trailer section. In this case,
+`Identity-Digest` MAY be merged into the header section; see {{Section 6.5.1 of
+HTTP}}.
 
 # The Want-Identity-Digest Field
 
-Want-Identity-Digest indicates that the sender would like to receive a
-representation digest on messages associated with the request URI and
-representation metadata where no content coding is applied, using the
-Identity-Digest field.
+`Want-Identity-Digest` is an integrity preference field; see {{Section 4 of
+DIGEST-FIELDS}}. It indicates that the sender would like to receive (via the
+`Identity-Digest` field) a representation digest on messages associated with the
+request URI and representation metadata where no content coding is applied.
 
-If Want-Identity-Digest is used in a response, it indicates that the server
-would like the client to provide the Identity-Digest field on future requests.
+If `Want-Identity-Digest` is used in a response, it indicates that the server
+would like the client to provide the `Identity-Digest` field on future requests.
 
-Want-Identity-Digest is only a hint. The receiver of the field can ignore it and
-send an Integrity field using any algorithm or omit fields entirely. It is not a
-protocol error if preferences are ignored. Applications that use Integrity
-fields and Integrity preferences can define expectations or constraints that
-operate in addition to this specification.
+`Want-Identity-Digest` is only a hint. The receiver of the field can ignore it
+and send an `Identity-Digest` field using any algorithm or omit one entirely. It
+is not a protocol error if preferences are ignored. Applications that use
+`Identity-Digest` and `Want-Identity-Digest` can define expectations or
+constraints that operate in addition to this specification.
 
-Want-Identity-Digest is of type `Dictionary` where each:
+`Want-Identity-Digest` is of type `Dictionary` where each:
 
 * key conveys the hashing algorithm;
 * value is an `Integer` ({{Section 3.3.1 of STRUCTURED-FIELDS}}) that conveys an
@@ -298,6 +206,104 @@ Examples:
 Want-Identity-Digest: sha-256=1
 Want-Identity-Digest: sha-512=3, sha-256=10, unixsum=0
 ~~~
+
+# Complementary Integrity Fields
+
+The following examples illustrate how Integrity fields can be used in
+combination to address different and complementary needs, particularly the cases
+described in {{introduction}}. The unencoded data used in the example is the
+string "An unexceptional string" following by an LF.
+
+When a response message is not conveying partial or encoded representation data,
+all Integrity fields contain the same value, making validation trivial and
+identical.
+
+~~~ http-message
+GET /boringstring HTTP/1.1
+Host: example.org
+
+~~~
+{: title="Simple GET request"}
+
+~~~ http-message
+NOTE: '\' line wrapping per RFC 8792
+
+HTTP/1.1 200 OK
+Content-Length: 24
+Content-Digest: \
+  sha-256=:5Bv3NIx05BPnh0jMph6v1RJ5Q7kl9LKMtQxmvc9+Z7Y=:
+Repr-Digest: \
+  sha-256=:5Bv3NIx05BPnh0jMph6v1RJ5Q7kl9LKMtQxmvc9+Z7Y=:
+Identity-Digest: \
+  sha-256=:5Bv3NIx05BPnh0jMph6v1RJ5Q7kl9LKMtQxmvc9+Z7Y=:
+
+An unexceptional string
+~~~
+{: title="Response to GET request"}
+
+When a response message conveys complete encoded content, the `Content-Digest`
+and the `Repr-Digest` are the same, while the `Identity-Digest` is different.
+
+~~~ http-message
+GET /boringstring HTTP/1.1
+Host: example.org
+Accept-Encoding: gzip
+
+~~~
+{: title="GET request with content negotiation"}
+
+~~~ http-message
+NOTE: '\' line wrapping per RFC 8792
+
+HTTP/1.1 200 OK
+Content-Encoding: gzip
+Content-Digest: \
+  sha-256=:XyjvEuFb1P5rqc2le3vQm7M96DwZhvmOwqHLu2xVpY4=:
+Repr-Digest: \
+  sha-256=:XyjvEuFb1P5rqc2le3vQm7M96DwZhvmOwqHLu2xVpY4=:
+Identity-Digest: \
+  sha-256=:5Bv3NIx05BPnh0jMph6v1RJ5Q7kl9LKMtQxmvc9+Z7Y=:
+
+1f 8b 08 00 79 1f 08 64 00 ff
+73 cc 53 28 cd 4b ad 48 4e 2d
+28 c9 cc cf 4b cc 51 28 2e 29
+ca cc 4b e7 02 00 7e af 07 44
+18 00 00 00
+~~~
+{: title="Response with gzip encoding"}
+
+Finally, when a response message contains partial and encoded content, all
+Integrity fields vary. The `Content-Digest` can be used to validate the
+integrity of the received part. `Repr-Digest` or `Identity-Digest` can be used
+later after reconstruction, the choice of which to use is left to the
+application, which would consider a range of factors outside the scope of
+discussion.
+
+~~~ http-message
+GET /boringstring HTTP/1.1
+Host: example.org
+Accept-Encoding: gzip
+Range: bytes=0-10
+
+~~~
+{: title="Range request with content negotiation"}
+
+~~~ http-message
+NOTE: '\' line wrapping per RFC 8792
+
+HTTP/1.1 206 Partial Content
+Content-Encoding: gzip
+Content-Digest: \
+  sha-256=:SotB7Pa5A7iHSBdh9mg1Ev/ktAzrxU4Z8ldcCIUyfI4=:
+Repr-Digest: \
+  sha-256=:XyjvEuFb1P5rqc2le3vQm7M96DwZhvmOwqHLu2xVpY4=:
+Identity-Digest: \
+  sha-256=:5Bv3NIx05BPnh0jMph6v1RJ5Q7kl9LKMtQxmvc9+Z7Y=:
+
+1f 8b 08 00 79 1f 08 64 00 ff
+~~~
+{: title="Partial response with gzip encoding"}
+
 
 # Security Considerations
 
