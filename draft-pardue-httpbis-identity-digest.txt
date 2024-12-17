@@ -73,9 +73,9 @@ Table of Contents
 
    1.  Introduction
    2.  Conventions and Definitions
-   3.  Complementary Integrity Fields
-   4.  The Identity-Digest Field
-   5.  The Want-Identity-Digest Field
+   3.  The Identity-Digest Field
+   4.  The Want-Identity-Digest Field
+   5.  Complementary Integrity Fields
    6.  Security Considerations
    7.  IANA Considerations
    8.  Normative References
@@ -148,20 +148,106 @@ Table of Contents
 
    This document uses the following terminology from Section 3 of
    [STRUCTURED-FIELDS] to specify syntax and parsing: Byte Sequence,
-   Dictionary, Integer, and List.
+   Dictionary, and Integer.
 
    The definitions "representation", "selected representation",
-   "representation data", "representation metadata", "user agent" and
-   "content" in this document are to be interpreted as described in
-   [HTTP].
+   "representation data", "representation metadata", and "content" in
+   this document are to be interpreted as described in [HTTP].
 
-   Integrity fields: collective term for Content-Digest, Repr-Digest,
-   and Identity-Digest
+   "Integrity fields" is the collective term for Content-Digest, Repr-
+   Digest, and Identity-Digest
 
-   Integrity preference fields: collective term for Want-Repr-Digest,
-   Want-Content-Digest, and Want-Identity-Digest
+   "Integrity preference fields" is the collective term for Want-Repr-
+   Digest, Want-Content-Digest, and Want-Identity-Digest
 
-3.  Complementary Integrity Fields
+3.  The Identity-Digest Field
+
+   The Identity-Digest HTTP field can be used in requests and responses
+   to communicate digests that are calculated using a hashing algorithm
+   applied to the representation with no content coding (Section 8.4.1
+   of [HTTP]).  Apart from the content coding concerns, it behaves
+   similarly to Repr-Digest (Section 3 of [DIGEST-FIELDS]).
+
+   Identity-Digest is a Dictionary (see Section 3.2 of
+   [STRUCTURED-FIELDS]) where each:
+
+   *  key conveys the hashing algorithm (see Section 5 of
+      [DIGEST-FIELDS] used to compute the digest;
+
+   *  value is a Byte Sequence (Section 3.3.5 of [STRUCTURED-FIELDS]),
+      that conveys an encoded version of the byte output produced by the
+      digest calculation.
+
+   For example:
+
+   NOTE: '\' line wrapping per RFC 8792
+
+   Identity-Digest: \
+     sha-512=:YMAam51Jz/jOATT6/zvHrLVgOYTGFy1d6GJiOHTohq4yP+pgk4vf2aCs\
+     yRZOtw8MjkM7iw7yZ/WkppmM44T3qg==:
+
+   The Dictionary type can be used, for example, to attach multiple
+   digests calculated using different hashing algorithms in order to
+   support a population of endpoints with different or evolving
+   capabilities.  Such an approach could support transitions away from
+   weaker algorithms (see Section 6.6 of [DIGEST-FIELDS]).
+
+   NOTE: '\' line wrapping per RFC 8792
+
+   Identity-Digest: \
+     sha-256=:d435Qo+nKZ+gLcUHn7GQtQ72hiBVAgqoLsZnZPiTGPk=:,\
+     sha-512=:YMAam51Jz/jOATT6/zvHrLVgOYTGFy1d6GJiOHTohq4yP+pgk4vf2aCs\
+     yRZOtw8MjkM7iw7yZ/WkppmM44T3qg==:
+
+   A recipient MAY ignore any or all digests.  Application-specific
+   behavior or local policy MAY set additional constraints on the
+   processing and validation practices of the conveyed digests.  The
+   security considerations cover some of the issues related to ignoring
+   digests (see Section 6.6 of [DIGEST-FIELDS]) and validating multiple
+   digests (see Section 6.7 of [DIGEST-FIELDS]).
+
+   A sender MAY send a digest without knowing whether the recipient
+   supports a given hashing algorithm.  A sender MAY send a digest if it
+   knows the recipient will ignore it.
+
+   Identity-Digest can be sent in a trailer section.  In this case,
+   Identity-Digest MAY be merged into the header section; see
+   Section 6.5.1 of [HTTP].
+
+4.  The Want-Identity-Digest Field
+
+   Want-Identity-Digest is an integrity preference field; see Section 4
+   of [DIGEST-FIELDS].  It indicates that the sender would like to
+   receive (via the Identity-Digest field) a representation digest on
+   messages associated with the request URI and representation metadata
+   where no content coding is applied.
+
+   If Want-Identity-Digest is used in a response, it indicates that the
+   server would like the client to provide the Identity-Digest field on
+   future requests.
+
+   Want-Identity-Digest is only a hint.  The receiver of the field can
+   ignore it and send an Identity-Digest field using any algorithm or
+   omit one entirely.  It is not a protocol error if preferences are
+   ignored.  Applications that use Identity-Digest and Want-Identity-
+   Digest can define expectations or constraints that operate in
+   addition to this specification.
+
+   Want-Identity-Digest is of type Dictionary where each:
+
+   *  key conveys the hashing algorithm;
+
+   *  value is an Integer (Section 3.3.1 of [STRUCTURED-FIELDS]) that
+      conveys an ascending, relative, weighted preference.  It must be
+      in the range 0 to 10 inclusive. 1 is the least preferred, 10 is
+      the most preferred, and a value of 0 means "not acceptable".
+
+   Examples:
+
+   Want-Identity-Digest: sha-256=1
+   Want-Identity-Digest: sha-512=3, sha-256=10, unixsum=0
+
+5.  Complementary Integrity Fields
 
    The following examples illustrate how Integrity fields can be used in
    combination to address different and complementary needs,
@@ -250,92 +336,6 @@ Table of Contents
    1f 8b 08 00 79 1f 08 64 00 ff
 
                Figure 6: Partial response with gzip encoding
-
-4.  The Identity-Digest Field
-
-   The Identity-Digest HTTP field can be used in requests and responses
-   to communicate digests that are calculated using a hashing algorithm
-   applied to the representation with no content coding (a.k.a. an
-   identity encoding).  Apart from the content coding concerns, it
-   behaves similarly to Repr-Digest.
-
-   Identity-Digest is a Dictionary (see Section 3.2 of
-   [STRUCTURED-FIELDS]) where each:
-
-   *  key conveys the hashing algorithm (see Section 5 of
-      [DIGEST-FIELDS] used to compute the digest;
-
-   *  value is a Byte Sequence (Section 3.3.5 of [STRUCTURED-FIELDS]),
-      that conveys an encoded version of the byte output produced by the
-      digest calculation.
-
-   For example:
-
-   NOTE: '\' line wrapping per RFC 8792
-
-   Identity-Digest: \
-     sha-512=:YMAam51Jz/jOATT6/zvHrLVgOYTGFy1d6GJiOHTohq4yP+pgk4vf2aCs\
-     yRZOtw8MjkM7iw7yZ/WkppmM44T3qg==:
-
-   The Dictionary type can be used, for example, to attach multiple
-   digests calculated using different hashing algorithms in order to
-   support a population of endpoints with different or evolving
-   capabilities.  Such an approach could support transitions away from
-   weaker algorithms (see Section 6.6 of [DIGEST-FIELDS]).
-
-   NOTE: '\' line wrapping per RFC 8792
-
-   Identity-Digest: \
-     sha-256=:d435Qo+nKZ+gLcUHn7GQtQ72hiBVAgqoLsZnZPiTGPk=:,\
-     sha-512=:YMAam51Jz/jOATT6/zvHrLVgOYTGFy1d6GJiOHTohq4yP+pgk4vf2aCs\
-     yRZOtw8MjkM7iw7yZ/WkppmM44T3qg==:
-
-   A recipient MAY ignore any or all digests.  Application-specific
-   behavior or local policy MAY set additional constraints on the
-   processing and validation practices of the conveyed digests.  The
-   security considerations cover some of the issues related to ignoring
-   digests (see Section 6.6 of [DIGEST-FIELDS]) and validating multiple
-   digests (see Section 6.7 of [DIGEST-FIELDS]).
-
-   A sender MAY send a digest without knowing whether the recipient
-   supports a given hashing algorithm.  A sender MAY send a digest if it
-   knows the recipient will ignore it.
-
-   Identity-Digest can be sent in a trailer section.  In this case,
-   Identity-Digest MAY be merged into the header section; see
-   Section 6.5.1 of [HTTP].
-
-5.  The Want-Identity-Digest Field
-
-   Want-Identity-Digest indicates that the sender would like to receive
-   a representation digest on messages associated with the request URI
-   and representation metadata where no content coding is applied, using
-   the Identity-Digest field.
-
-   If Want-Identity-Digest is used in a response, it indicates that the
-   server would like the client to provide the Identity-Digest field on
-   future requests.
-
-   Want-Identity-Digest is only a hint.  The receiver of the field can
-   ignore it and send an Integrity field using any algorithm or omit
-   fields entirely.  It is not a protocol error if preferences are
-   ignored.  Applications that use Integrity fields and Integrity
-   preferences can define expectations or constraints that operate in
-   addition to this specification.
-
-   Want-Identity-Digest is of type Dictionary where each:
-
-   *  key conveys the hashing algorithm;
-
-   *  value is an Integer (Section 3.3.1 of [STRUCTURED-FIELDS]) that
-      conveys an ascending, relative, weighted preference.  It must be
-      in the range 0 to 10 inclusive. 1 is the least preferred, 10 is
-      the most preferred, and a value of 0 means "not acceptable".
-
-   Examples:
-
-   Want-Identity-Digest: sha-256=1
-   Want-Identity-Digest: sha-512=3, sha-256=10, unixsum=0
 
 6.  Security Considerations
 
