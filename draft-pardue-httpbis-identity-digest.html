@@ -1173,22 +1173,25 @@ fields for this purpose.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-the-want-identity-digest-fi" class="internal xref">The Want-Identity-Digest Field</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-integrity-fields-are-comple" class="internal xref">Integrity Fields are Complementary</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-messages-containing-both-id" class="internal xref">Messages containing both Identity-Digest and Content-Encoding</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-integrity-fields-are-comple" class="internal xref">Integrity Fields are Complementary</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1356,18 +1359,30 @@ Want-Identity-Digest: sha-512=3, sha-256=10, unixsum=0
 </div>
 </section>
 </div>
-<div id="integrity-fields-are-complementary">
+<div id="messages-containing-both-identity-digest-and-content-encoding">
 <section id="section-5">
-      <h2 id="name-integrity-fields-are-comple">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-integrity-fields-are-comple" class="section-name selfRef">Integrity Fields are Complementary</a>
+      <h2 id="name-messages-containing-both-id">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-messages-containing-both-id" class="section-name selfRef">Messages containing both Identity-Digest and Content-Encoding</a>
       </h2>
-<p id="section-5-1">Integrity fields can be used in combination to address different and
-complementary needs, particularly the cases described in <a href="#introduction" class="auto internal xref">Section 1</a>.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">In the following examples, the unencoded response data is the string "An
-unexceptional string" following by an LF.<a href="#section-5-2" class="pilcrow">¶</a></p>
-<p id="section-5-3">The first example demonstrates a request that uses content negotiation.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-1">Digests delivered through <code>Identity-Digest</code> apply to the unencoded representation. If a message is
+received with content coding, a recipient needs to decode the message in order
+to calculate the digest that can subsequently be used for validation. If
+multiple content codings are applied, the recipient needs to decode all
+encodings in order before validation.<a href="#section-5-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="integrity-fields-are-complementary">
+<section id="section-6">
+      <h2 id="name-integrity-fields-are-comple">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-integrity-fields-are-comple" class="section-name selfRef">Integrity Fields are Complementary</a>
+      </h2>
+<p id="section-6-1">Integrity fields can be used in combination to address different and
+complementary needs, particularly the cases described in <a href="#introduction" class="auto internal xref">Section 1</a>.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2">In the following examples, the unencoded response data is the string "An
+unexceptional string" following by an LF.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<p id="section-6-3">The first example demonstrates a request that uses content negotiation.<a href="#section-6-3" class="pilcrow">¶</a></p>
 <span id="name-get-request-with-content-ne"></span><figure id="figure-1">
-        <div class="lang-http-message sourcecode" id="section-5-4.1">
+        <div class="lang-http-message sourcecode" id="section-6-4.1">
 <pre>
 GET /boringstring HTTP/1.1
 Host: example.org
@@ -1378,10 +1393,10 @@ Accept-Encoding: gzip
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
 <a href="#name-get-request-with-content-ne" class="selfRef">GET request with content negotiation</a>
         </figcaption></figure>
-<p id="section-5-5">The server responds with the full GZIP-encoded representation. The <code>Repr-Digest</code>
-and <code>Identity-Digest</code> therefore differ.<a href="#section-5-5" class="pilcrow">¶</a></p>
+<p id="section-6-5">The server responds with the full GZIP-encoded representation. The <code>Repr-Digest</code>
+and <code>Identity-Digest</code> therefore differ.<a href="#section-6-5" class="pilcrow">¶</a></p>
 <span id="name-get-response-with-gzip-enco"></span><figure id="figure-2">
-        <div class="lang-http-message sourcecode" id="section-5-6.1">
+        <div class="lang-http-message sourcecode" id="section-6-6.1">
 <pre>
 NOTE: '\' line wrapping per RFC 8792
 
@@ -1403,9 +1418,9 @@ ca cc 4b e7 02 00 7e af 07 44
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
 <a href="#name-get-response-with-gzip-enco" class="selfRef">GET response with GZIP-encoded content</a>
         </figcaption></figure>
-<p id="section-5-7">The second example demonstrates a range request with content negotiation.<a href="#section-5-7" class="pilcrow">¶</a></p>
+<p id="section-6-7">The second example demonstrates a range request with content negotiation.<a href="#section-6-7" class="pilcrow">¶</a></p>
 <span id="name-range-request-with-content-"></span><figure id="figure-3">
-        <div class="lang-http-message sourcecode" id="section-5-8.1">
+        <div class="lang-http-message sourcecode" id="section-6-8.1">
 <pre>
 GET /boringstring HTTP/1.1
 Host: example.org
@@ -1417,15 +1432,15 @@ Range: bytes=0-10
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
 <a href="#name-range-request-with-content-" class="selfRef">Range request with content negotiation</a>
         </figcaption></figure>
-<p id="section-5-9">The server responds with a 206 Partial Content response using GZIP encoding, it
+<p id="section-6-9">The server responds with a 206 Partial Content response using GZIP encoding, it
 has three different Integrity fields. The <code>Content-Digest</code> relates to the
 response message content that can be used to validate the integrity of the
 received part. <code>Repr-Digest</code> and <code>Identity-Digest</code> can be used later once the
 entire object is reconstructed. The choice of which to use is left to the
 application that would consider a range of factors outside the scope of
-this document.<a href="#section-5-9" class="pilcrow">¶</a></p>
+this document.<a href="#section-6-9" class="pilcrow">¶</a></p>
 <span id="name-partial-response-with-gzip-"></span><figure id="figure-4">
-        <div class="lang-http-message sourcecode" id="section-5-10.1">
+        <div class="lang-http-message sourcecode" id="section-6-10.1">
 <pre>
 NOTE: '\' line wrapping per RFC 8792
 
@@ -1448,26 +1463,26 @@ Identity-Digest: \
 </section>
 </div>
 <div id="security-considerations">
-<section id="section-6">
+<section id="section-7">
       <h2 id="name-security-considerations">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-6-1">The considerations in <span>[<a href="#DIGEST-FIELDS" class="cite xref">DIGEST-FIELDS</a>]</span> apply. There are no known additional
-considerations.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-7-1">The considerations in <span>[<a href="#DIGEST-FIELDS" class="cite xref">DIGEST-FIELDS</a>]</span> apply. There are no known additional
+considerations.<a href="#section-7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
-<section id="section-7">
+<section id="section-8">
       <h2 id="name-iana-considerations">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-7-1">This document has no IANA actions (yet)<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-8-1">This document has no IANA actions (yet)<a href="#section-8-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-normative-references">
-<section id="section-8">
+<section id="section-9">
       <h2 id="name-normative-references">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
       </h2>
 <dl class="references">
 <dt id="DIGEST-FIELDS">[DIGEST-FIELDS]</dt>

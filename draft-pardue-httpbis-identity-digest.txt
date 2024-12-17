@@ -75,10 +75,11 @@ Table of Contents
    2.  Conventions and Definitions
    3.  The Identity-Digest Field
    4.  The Want-Identity-Digest Field
-   5.  Integrity Fields are Complementary
-   6.  Security Considerations
-   7.  IANA Considerations
-   8.  Normative References
+   5.  Messages containing both Identity-Digest and Content-Encoding
+   6.  Integrity Fields are Complementary
+   7.  Security Considerations
+   8.  IANA Considerations
+   9.  Normative References
    Acknowledgments
    Authors' Addresses
 
@@ -247,7 +248,16 @@ Table of Contents
    Want-Identity-Digest: sha-256=1
    Want-Identity-Digest: sha-512=3, sha-256=10, unixsum=0
 
-5.  Integrity Fields are Complementary
+5.  Messages containing both Identity-Digest and Content-Encoding
+
+   Digests delivered through Identity-Digest apply to the unencoded
+   representation.  If a message is received with content coding, a
+   recipient needs to decode the message in order to calculate the
+   digest that can subsequently be used for validation.  If multiple
+   content codings are applied, the recipient needs to decode all
+   encodings in order before validation.
+
+6.  Integrity Fields are Complementary
 
    Integrity fields can be used in combination to address different and
    complementary needs, particularly the cases described in Section 1.
@@ -319,16 +329,16 @@ Table of Contents
 
                Figure 4: Partial response with GZIP encoding
 
-6.  Security Considerations
+7.  Security Considerations
 
    The considerations in [DIGEST-FIELDS] apply.  There are no known
    additional considerations.
 
-7.  IANA Considerations
+8.  IANA Considerations
 
    This document has no IANA actions (yet)
 
-8.  Normative References
+9.  Normative References
 
    [DIGEST-FIELDS]
               Polli, R. and L. Pardue, "Digest Fields", RFC 9530,
