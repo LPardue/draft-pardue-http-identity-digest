@@ -209,11 +209,11 @@ Want-Identity-Digest: sha-512=3, sha-256=10, unixsum=0
 
 # Messages containing both Identity-Digest and Content-Encoding
 
-`Identity-Digest` applies to the unencoded representation. If a message is
+Digests delivered through `Identity-Digest` apply to the unencoded representation. If a message is
 received with content coding, a recipient needs to decode the message in order
 to calculate the digest that can subsequently be used for validation. If
 multiple content codings are applied, the recipient needs to decode all
-encodings before usage.
+encodings in order before validation.
 
 # Integrity Fields are Complementary
 
