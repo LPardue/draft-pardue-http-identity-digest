@@ -247,7 +247,7 @@ ca cc 4b e7 02 00 7e af 07 44
 ~~~
 {: title="GET response with GZIP-encoded content"}
 
-The second example demonstrates a range request with content negotiation
+The second example demonstrates a range request with content negotiation.
 
 ~~~ http-message
 GET /boringstring HTTP/1.1
