@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-17T01:07:36.300848+00:00",
+  "timestamp": "2024-12-19T01:05:23.722543+00:00",
   "repo": "LPardue/draft-pardue-http-identity-digest",
   "labels": [
     {
@@ -57,13 +57,69 @@
       "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/issues/7",
       "state": "OPEN",
       "author": "mikewest",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "How should `Identity-Digest` position itself [Sections 3.1](https://www.rfc-editor.org/rfc/rfc9530.html#section-3.1) and [3.2](https://www.rfc-editor.org/rfc/rfc9530.html#section-3.2) of DIGEST-FIELDS? Do the same considerations apply here that applied to `Repr-Digest`?",
       "createdAt": "2024-11-26T07:34:41Z",
-      "updatedAt": "2024-11-26T07:34:41Z",
+      "updatedAt": "2024-12-17T23:10:50Z",
       "closedAt": null,
+      "comments": [
+        {
+          "author": "LPardue",
+          "authorAssociation": "OWNER",
+          "body": "I didn't put too much thought into this but I suspect the answer is that something like these normative requirements apply. I've taken out the colour text for brevity:\r\n\r\n> When the representation enclosed in a state-changing request does not describe the target resource, the identity digest MUST be computed on the unencoded representation data. \r\n\r\n> In responses,\r\n\r\n> * if the representation describes the status of the request, Identity-Digest MUST be computed on the unencoded enclosed representation;\r\n> * if there is a referenced resource, Identity-Digest MUST be computed on the unencoded selected representation of the referenced resource even if that is different from the target resource. This might or might not result in computing Identity-Digest on the unencoded enclosed representation.\r\n\r\nI think we can mull on this a little more and propose some text in a follow up PR to allow HTTP gurus to weigh in.",
+          "createdAt": "2024-12-17T23:10:32Z",
+          "updatedAt": "2024-12-17T23:10:50Z"
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "id": "I_kwDOJGwozs6jjI0j",
+      "title": "Bikeshed: field naming",
+      "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/issues/10",
+      "state": "OPEN",
+      "author": "LPardue",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "When draft -00 was published and solicited on the WG mailing group list, Roy Fielding [replied](https://lists.w3.org/Archives/Public/ietf-http-wg/2023JanMar/0214.html) with the following wrt the field names `Identity-Digest` and `Want-Identity-Digest`:\r\n\r\n> This misuses the term identity, which was a poor use of a word in the\r\n> first place to refer to a transformation that doesn't change the content.\r\n> In any case, \"identity\" refers to the coding, not the content.\r\n> \r\n> It doesn't help to use the same term for two different things in HTTP.\r\n> \r\n> If we want to send this field in a message with Content-Encoding applied,\r\n> then it would be easier understood as Decoded-Digest or Digest-After-Decoding\r\n> or Want-Unencoded-Digest (or maybe just Digested and WUD -- I hate\r\n> long field names).\r\n\r\nI don't have much strong opinion here. I'm not stuck on `Identity-Digest`/`Want-Identity-Digest`. I'm not a huge fan of the suggestions, primarily because it appears to suggest breaking the symmetry that we have with `Repr-Digest`/`Want-Repr-Digest` and `Content-Digest`/`Want-Content-Digest`. Some of them also step awat from the `-Digest` suffix, which seems to be different jsut for the sake of it\r\n\r\nIn the intervening 2 years, we've picked up a concrete use case with signed SRI, and we'd need to coordinate any name changes with that document. Ideally we'd do the rename jsut once to avoid downstreams getting confused.\r\n\r\nSummarizing the proposals so far (list to be kept updated)\r\n\r\n# Integrity field name\r\n\r\n* Identity-Digest\r\n* Decoded-Digest\r\n* Digest-After-Decoding\r\n* Unencoded-Digest\r\n* Digested\r\n\r\n# Integrity preference field name\r\n\r\n* Want-Identity-Digest\r\n* Want-Unencoded-Digest\r\n* WUD\r\n\r\n\r\nHaving reread the I-D and the email, I might lean towards Unencoded-Digest because a) the I-D already uses the word unencoded a few time and b) uncoded is  less suggestive that something is being undone than `Decoded` (I find it weird to consider decoding something that doesn't have any coding).\r\n\r\nBikeshed away\r\n",
+      "createdAt": "2024-12-17T04:25:17Z",
+      "updatedAt": "2024-12-17T04:26:21Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 11,
+      "id": "I_kwDOJGwozs6jjJlj",
+      "title": "Multiple digests should not be sent in the same message if they are not different",
+      "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/issues/11",
+      "state": "CLOSED",
+      "author": "LPardue",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "When draft -00 was published and solicited on the WG mailing group list, Roy Fielding [replied](https://lists.w3.org/Archives/Public/ietf-http-wg/2023JanMar/0214.html) with the following wrt the \"complementary header fields\" section\r\n\r\n> Multiple digests should not be sent in the same message unless their\r\n> digests are different. Transforming the message content to remove the\r\n> outer coding would necessitate replacing the field values as well, as in\r\n> replacing the Content-Digest field-value with the Identity-Digest's value\r\n> and removing Identity-Digest. I know it's a cute example, but in my\r\n> experience the readers tend to implement the examples in practice\r\n> even when they are nonsensical and a waste of network bandwidth.\r\n\r\nThe action here would be to edit down the example",
+      "createdAt": "2024-12-17T04:28:33Z",
+      "updatedAt": "2024-12-17T22:59:25Z",
+      "closedAt": "2024-12-17T22:59:25Z",
+      "comments": []
+    },
+    {
+      "number": 13,
+      "id": "I_kwDOJGwozs6jjQme",
+      "title": "Dealing with multiple encodings",
+      "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/issues/13",
+      "state": "CLOSED",
+      "author": "LPardue",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "When draft -00 was published and solicited on the WG mailing group list, Roy Fielding [replied](https://lists.w3.org/Archives/Public/ietf-http-wg/2023JanMar/0214.html) with the following:\r\n\r\n> Also, you have not considered multiple content codings yet, which would\r\n> (rarely) consist of a private encoding enclosed within a compression:\r\n> \r\n>    Content-Encoding: bzerp, gzip\r\n> \r\n> I would expect, in that case, for both encodings to be decoded before the\r\n> identity-digest is applicable. YMMV.",
+      "createdAt": "2024-12-17T04:54:05Z",
+      "updatedAt": "2024-12-17T23:03:52Z",
+      "closedAt": "2024-12-17T23:03:52Z",
       "comments": []
     }
   ],
@@ -103,7 +159,7 @@
       "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/pull/2",
       "state": "MERGED",
       "author": "mikewest",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Range requests should return 206 responses, not 200.\r\n\r\nThey should also include headers like `Content-Range` and etc, but that seems like overkill for this example. The status code, however, seems like just the right amount of pedantry.",
@@ -139,7 +195,7 @@
       "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/pull/3",
       "state": "MERGED",
       "author": "mikewest",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "RFC9530 was published! :)",
@@ -167,7 +223,7 @@
       "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/pull/4",
       "state": "MERGED",
       "author": "mikewest",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "1. RFC9651 superseded RFC8941.\r\n2. It doesn't look like the term `Boolean` is used in the draft.",
@@ -195,7 +251,7 @@
       "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/pull/5",
       "state": "MERGED",
       "author": "mikewest",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "As noted in DIGEST-FIELDS, re-encoding decoded content isn't always possible, and could require guessing at compression level settings or other configuration information that isn't available in either the request or response context.",
@@ -221,24 +277,26 @@
       "id": "PR_kwDOJGwozs6DJMqa",
       "title": "Editorial: Porting language from DIGEST-FIELDS.",
       "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/pull/6",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "mikewest",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Aligning the `Identity-Digest` description with `Content-Digest` and `Repr-Digest` language from RFC9530.",
       "createdAt": "2024-11-26T07:32:15Z",
-      "updatedAt": "2024-11-26T07:32:15Z",
+      "updatedAt": "2024-12-17T02:52:13Z",
       "baseRepository": "LPardue/draft-pardue-http-identity-digest",
       "baseRefName": "main",
       "baseRefOid": "6be3bcfeccf34b30b05d2d331de080a93970bf96",
       "headRepository": "mikewest/draft-pardue-http-identity-digest",
       "headRefName": "patch-5",
       "headRefOid": "582759ee99691f01cae3bae7288f97e45680e73f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-12-17T02:52:13Z",
+      "mergedAt": "2024-12-17T02:52:13Z",
+      "mergedBy": "LPardue",
+      "mergeCommit": {
+        "oid": "d613ac0c5090ae6a4860359eb6fdac02fb77ef53"
+      },
       "comments": [],
       "reviews": []
     },
@@ -249,7 +307,7 @@
       "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/pull/8",
       "state": "MERGED",
       "author": "mikewest",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "As we discussed, I'd like to visibly help out.",
@@ -277,6 +335,146 @@
         }
       ],
       "reviews": []
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDOJGwozs6Fbx_Y",
+      "title": "meta updates",
+      "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/pull/9",
+      "state": "MERGED",
+      "author": "LPardue",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "- **update metadata stuff**\r\n- **Automatic update of .gitignore**\r\n- **Automatic update of Makefile**\r\n- **Automatic update of .github/workflows/ghpages.yml**\r\n- **Automatic update of .github/workflows/publish.yml**\r\n- **Automatic update of .github/workflows/archive.yml**\r\n- **Automatic update of .github/workflows/update.yml**\r\n- **Automatic update of README.md**\r\n- **Automatic update of .github/CODEOWNERS**\r\n",
+      "createdAt": "2024-12-17T03:07:52Z",
+      "updatedAt": "2024-12-17T03:09:21Z",
+      "baseRepository": "LPardue/draft-pardue-http-identity-digest",
+      "baseRefName": "main",
+      "baseRefOid": "d613ac0c5090ae6a4860359eb6fdac02fb77ef53",
+      "headRepository": "LPardue/draft-pardue-http-identity-digest",
+      "headRefName": "meta-updates",
+      "headRefOid": "c48930fadddc10ad3d60139ce9e1bc4c16c91fd1",
+      "closedAt": "2024-12-17T03:09:14Z",
+      "mergedAt": "2024-12-17T03:09:14Z",
+      "mergedBy": "LPardue",
+      "mergeCommit": {
+        "oid": "6e57e6b411cbb4f12cb855b18bf0fb49704d81b6"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 12,
+      "id": "PR_kwDOJGwozs6FcI4F",
+      "title": "Update examples to be clearer",
+      "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/pull/12",
+      "state": "MERGED",
+      "author": "LPardue",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes https://github.com/LPardue/draft-pardue-http-identity-digest/issues/11",
+      "createdAt": "2024-12-17T04:53:00Z",
+      "updatedAt": "2024-12-17T22:59:27Z",
+      "baseRepository": "LPardue/draft-pardue-http-identity-digest",
+      "baseRefName": "main",
+      "baseRefOid": "c057b4a826819c9db835f13612e50e328c46492a",
+      "headRepository": "LPardue/draft-pardue-http-identity-digest",
+      "headRefName": "simplify-example",
+      "headRefOid": "2aee0c9cbf639a61ce76562a818283598edfa26d",
+      "closedAt": "2024-12-17T22:59:24Z",
+      "mergedAt": "2024-12-17T22:59:24Z",
+      "mergedBy": "LPardue",
+      "mergeCommit": {
+        "oid": "298a256bb61ee43295e12f65bad6bb7eb70e03bd"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJGwozs6VfUh7",
+          "commit": {
+            "abbreviatedOid": "3c674a9"
+          },
+          "author": "mikewest",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM % one missing `.`.",
+          "createdAt": "2024-12-17T07:09:35Z",
+          "updatedAt": "2024-12-17T07:10:38Z",
+          "comments": [
+            {
+              "originalPosition": 81,
+              "body": "```suggestion\r\nThe second example demonstrates a range request with content negotiation.\r\n```",
+              "createdAt": "2024-12-17T07:09:35Z",
+              "updatedAt": "2024-12-17T07:10:38Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "id": "PR_kwDOJGwozs6FcLjP",
+      "title": "How to deal with Content-Encoding",
+      "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/pull/14",
+      "state": "MERGED",
+      "author": "LPardue",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #13 ",
+      "createdAt": "2024-12-17T05:02:51Z",
+      "updatedAt": "2024-12-17T23:03:55Z",
+      "baseRepository": "LPardue/draft-pardue-http-identity-digest",
+      "baseRefName": "main",
+      "baseRefOid": "298a256bb61ee43295e12f65bad6bb7eb70e03bd",
+      "headRepository": "LPardue/draft-pardue-http-identity-digest",
+      "headRefName": "multiple-encodings",
+      "headRefOid": "3c838e520dd8574e1447b0d795399da11f517582",
+      "closedAt": "2024-12-17T23:03:51Z",
+      "mergedAt": "2024-12-17T23:03:51Z",
+      "mergedBy": "LPardue",
+      "mergeCommit": {
+        "oid": "4dcbd6745768dd3d9cad3308a8f76645812b6619"
+      },
+      "comments": [
+        {
+          "author": "LPardue",
+          "authorAssociation": "OWNER",
+          "body": "Great suggestions, thanks.",
+          "createdAt": "2024-12-17T23:02:33Z",
+          "updatedAt": "2024-12-17T23:02:33Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJGwozs6VfSrf",
+          "commit": {
+            "abbreviatedOid": "5573ca7"
+          },
+          "author": "mikewest",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM. Small phrasing suggestions; feel free to ignore if the current text is better to your ear.",
+          "createdAt": "2024-12-17T07:04:16Z",
+          "updatedAt": "2024-12-17T07:05:31Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "Tiny phrasing nits that read better to me:\r\n\r\n```suggestion\r\nDigests delivered through `Identity-Digest` apply to the unencoded representation. If a message is\r\n```",
+              "createdAt": "2024-12-17T07:04:16Z",
+              "updatedAt": "2024-12-17T07:05:31Z"
+            },
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\r\nencodings in order before validation.\r\n```",
+              "createdAt": "2024-12-17T07:05:03Z",
+              "updatedAt": "2024-12-17T07:05:31Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
