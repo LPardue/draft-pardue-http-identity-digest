@@ -5,8 +5,8 @@
 HTTP                                                           L. Pardue
 Internet-Draft                                                Cloudflare
 Intended status: Standards Track                                 M. West
-Expires: 20 June 2025                                             Google
-                                                        17 December 2024
+Expires: 26 June 2025                                             Google
+                                                        23 December 2024
 
 
                           HTTP Identity Digest
@@ -53,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 June 2025.
+   This Internet-Draft will expire on 26 June 2025.
 
 Copyright Notice
 
@@ -156,18 +156,22 @@ Table of Contents
    this document are to be interpreted as described in [HTTP].
 
    "Integrity fields" is the collective term for Content-Digest, Repr-
-   Digest, and Identity-Digest
+   Digest, and Identity-Digest.
 
    "Integrity preference fields" is the collective term for Want-Repr-
-   Digest, Want-Content-Digest, and Want-Identity-Digest
+   Digest, Want-Content-Digest, and Want-Identity-Digest.
 
 3.  The Identity-Digest Field
 
    The Identity-Digest HTTP field can be used in requests and responses
    to communicate digests that are calculated using a hashing algorithm
    applied to the representation with no content coding (Section 8.4.1
-   of [HTTP]).  Apart from the content coding concerns, it behaves
-   similarly to Repr-Digest (Section 3 of [DIGEST-FIELDS]).
+   of [HTTP]).
+
+   Apart from the content coding concerns, Identity-Digest behaves
+   similarly to Repr-Digest (Section 3 of [DIGEST-FIELDS]).  In the
+   absence of content coding, Identity-Digest is identical to Repr-
+   Digest.
 
    Identity-Digest is a Dictionary (see Section 3.2 of
    [STRUCTURED-FIELDS]) where each:
