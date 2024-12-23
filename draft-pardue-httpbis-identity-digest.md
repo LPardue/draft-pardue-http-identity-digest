@@ -115,18 +115,20 @@ data", "representation metadata", and "content" in this document are to be
 interpreted as described in {{!HTTP=RFC9110}}.
 
 "Integrity fields" is the collective term for `Content-Digest`, `Repr-Digest`,
-and `Identity-Digest`
+and `Identity-Digest`.
 
 "Integrity preference fields" is the collective term for `Want-Repr-Digest`,
-`Want-Content-Digest`, and `Want-Identity-Digest`
+`Want-Content-Digest`, and `Want-Identity-Digest`.
 
 # The Identity-Digest Field {#identity-digest}
 
 The `Identity-Digest` HTTP field can be used in requests and responses to
 communicate digests that are calculated using a hashing algorithm applied to the
-representation with no content coding ({{Section 8.4.1 of HTTP}}). Apart from
-the content coding concerns, it behaves similarly to `Repr-Digest` ({{Section 3 of
-DIGEST-FIELDS}}).
+representation with no content coding ({{Section 8.4.1 of HTTP}}).
+
+Apart from the content coding concerns, `Identity-Digest` behaves similarly
+to `Repr-Digest` ({{Section 3 of DIGEST-FIELDS}}). In the absence of content
+coding, `Identity-Digest` is identical to `Repr-Digest`.
 
 `Identity-Digest` is a `Dictionary` (see {{Section 3.2 of STRUCTURED-FIELDS}})
 where each:
