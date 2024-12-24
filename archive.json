@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-22T01:07:05.558649+00:00",
+  "timestamp": "2024-12-24T01:02:00.568291+00:00",
   "repo": "LPardue/draft-pardue-http-identity-digest",
   "labels": [
     {
@@ -473,6 +473,48 @@
               "updatedAt": "2024-12-17T07:05:31Z"
             }
           ]
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "id": "PR_kwDOJGwozs6GCRdx",
+      "title": "The is the same as Repr-Digest",
+      "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/pull/15",
+      "state": "MERGED",
+      "author": "martinthomson",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "...when there is no content coding.",
+      "createdAt": "2024-12-23T03:55:17Z",
+      "updatedAt": "2024-12-23T03:59:19Z",
+      "baseRepository": "LPardue/draft-pardue-http-identity-digest",
+      "baseRefName": "main",
+      "baseRefOid": "4dcbd6745768dd3d9cad3308a8f76645812b6619",
+      "headRepository": "martinthomson/draft-pardue-http-identity-digest",
+      "headRefName": "patch-1",
+      "headRefOid": "8f36608f46ff62ec6251820bd94a258f5a7c0b94",
+      "closedAt": "2024-12-23T03:59:19Z",
+      "mergedAt": "2024-12-23T03:59:19Z",
+      "mergedBy": "LPardue",
+      "mergeCommit": {
+        "oid": "55261de1991b49785531c8fab459ae7695bc8762"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJGwozs6WMdip",
+          "commit": {
+            "abbreviatedOid": "8f36608"
+          },
+          "author": "LPardue",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-12-23T03:59:10Z",
+          "updatedAt": "2024-12-23T03:59:10Z",
+          "comments": []
         }
       ]
     }
