@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-05T01:07:13.046037+00:00",
+  "timestamp": "2025-01-07T01:02:19.617871+00:00",
   "repo": "LPardue/draft-pardue-http-identity-digest",
   "labels": [
     {
@@ -86,9 +86,17 @@
       "labels": [],
       "body": "When draft -00 was published and solicited on the WG mailing group list, Roy Fielding [replied](https://lists.w3.org/Archives/Public/ietf-http-wg/2023JanMar/0214.html) with the following wrt the field names `Identity-Digest` and `Want-Identity-Digest`:\r\n\r\n> This misuses the term identity, which was a poor use of a word in the\r\n> first place to refer to a transformation that doesn't change the content.\r\n> In any case, \"identity\" refers to the coding, not the content.\r\n> \r\n> It doesn't help to use the same term for two different things in HTTP.\r\n> \r\n> If we want to send this field in a message with Content-Encoding applied,\r\n> then it would be easier understood as Decoded-Digest or Digest-After-Decoding\r\n> or Want-Unencoded-Digest (or maybe just Digested and WUD -- I hate\r\n> long field names).\r\n\r\nI don't have much strong opinion here. I'm not stuck on `Identity-Digest`/`Want-Identity-Digest`. I'm not a huge fan of the suggestions, primarily because it appears to suggest breaking the symmetry that we have with `Repr-Digest`/`Want-Repr-Digest` and `Content-Digest`/`Want-Content-Digest`. Some of them also step awat from the `-Digest` suffix, which seems to be different jsut for the sake of it\r\n\r\nIn the intervening 2 years, we've picked up a concrete use case with signed SRI, and we'd need to coordinate any name changes with that document. Ideally we'd do the rename jsut once to avoid downstreams getting confused.\r\n\r\nSummarizing the proposals so far (list to be kept updated)\r\n\r\n# Integrity field name\r\n\r\n* Identity-Digest\r\n* Decoded-Digest\r\n* Digest-After-Decoding\r\n* Unencoded-Digest\r\n* Digested\r\n\r\n# Integrity preference field name\r\n\r\n* Want-Identity-Digest\r\n* Want-Unencoded-Digest\r\n* WUD\r\n\r\n\r\nHaving reread the I-D and the email, I might lean towards Unencoded-Digest because a) the I-D already uses the word unencoded a few time and b) uncoded is  less suggestive that something is being undone than `Decoded` (I find it weird to consider decoding something that doesn't have any coding).\r\n\r\nBikeshed away\r\n",
       "createdAt": "2024-12-17T04:25:17Z",
-      "updatedAt": "2024-12-17T04:26:21Z",
+      "updatedAt": "2025-01-06T10:17:16Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "mikewest",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'm fine with `Unencoded-Digest`. Names are hard: each is wrong in different ways, and `Unencoded-Digest` might well be the least worst!\r\n\r\nThat said, \"unencoded\" leaves a little ambiguity with regard to what unencoded content is being digested. The actual message content, a la `Content-Digest`? The entire representation data, a la `Repr-Digest`?\r\n\r\nI wonder if something like `Resource-Digest` would give more clarity about the digest's application to the [resource](https://www.rfc-editor.org/rfc/rfc9110.html#name-resources) itself, rather than a specific representation of that thing in a negotiated response?",
+          "createdAt": "2025-01-06T10:17:14Z",
+          "updatedAt": "2025-01-06T10:17:14Z"
+        }
+      ]
     },
     {
       "number": 11,
