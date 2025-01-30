@@ -209,7 +209,7 @@ Want-Unencoded-Digest: sha-256=1
 Want-Unencoded-Digest: sha-512=3, sha-256=10, unixsum=0
 ~~~
 
-# Messages containing both Unencoded-Digest and Content-Encoding
+# Messages containing both Unencoded-Digest and Content-Encoding {#encoding-and-unencoded}
 
 Digests delivered through `Unencoded-Digest` apply to the unencoded representation. If a message is
 received with content coding, a recipient needs to decode the message in order
@@ -296,8 +296,16 @@ Unencoded-Digest: \
 
 # Security Considerations
 
-The considerations in {{DIGEST-FIELDS}} apply. There are no known additional
-considerations.
+The considerations in {{DIGEST-FIELDS}} apply.
+
+HTTP messages can contain both Content-Encoding and Unencoded-Digest
+({{encoding-and-unencoded}}). In order to validate the unencoded-digest, encoded
+content would need to be decoded. The might offer the opportunity for an
+attacker to direct malicious data into a decoder. One possible mitigation would
+be to also provide a Content-Digest or Repr-Digest in the message, allowing for
+validation of the received bytes before further processing. Furthermore, the use
+of signatures as explained in {{Section 6.3 of DIGEST-FIELDS}} can address data
+substitution attacks.
 
 
 # IANA Considerations
