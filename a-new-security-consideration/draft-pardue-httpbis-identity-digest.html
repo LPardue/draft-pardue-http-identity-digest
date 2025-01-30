@@ -1475,8 +1475,9 @@ Unencoded-Digest: \
 content would need to be decoded. The might offer the opportunity for an
 attacker to direct malicious data into a decoder. One possible mitigation would
 be to also provide a Content-Digest or Repr-Digest in the message, allowing for
-validation of the received bytes before further processing. Such a mitigation
-would also benefit from the use of signatures as explained in <span><a href="https://rfc-editor.org/rfc/rfc9530#section-6.3" class="relref">Section 6.3</a> of [<a href="#DIGEST-FIELDS" class="cite xref">DIGEST-FIELDS</a>]</span>.<a href="#section-7-2" class="pilcrow">¶</a></p>
+validation of the received bytes before further processing. Furthermore, the use
+of signatures as explained in <span><a href="https://rfc-editor.org/rfc/rfc9530#section-6.3" class="relref">Section 6.3</a> of [<a href="#DIGEST-FIELDS" class="cite xref">DIGEST-FIELDS</a>]</span> can address data
+substitution attacks.<a href="#section-7-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">

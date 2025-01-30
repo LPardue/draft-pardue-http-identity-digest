@@ -343,9 +343,9 @@ Table of Contents
    for an attacker to direct malicious data into a decoder.  One
    possible mitigation would be to also provide a Content-Digest or
    Repr-Digest in the message, allowing for validation of the received
-   bytes before further processing.  Such a mitigation would also
-   benefit from the use of signatures as explained in Section 6.3 of
-   [DIGEST-FIELDS].
+   bytes before further processing.  Furthermore, the use of signatures
+   as explained in Section 6.3 of [DIGEST-FIELDS] can address data
+   substitution attacks.
 
 8.  IANA Considerations
 
