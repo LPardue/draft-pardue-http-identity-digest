@@ -299,7 +299,7 @@ Unencoded-Digest: \
 The considerations in {{DIGEST-FIELDS}} apply.
 
 HTTP messages can contain both Content-Encoding and Unencoded-Digest
-({{encoding-and-unencoded}}). In order to validate the unencoded-digest, encoded
+({{encoding-and-unencoded}}). In order to validate the Unencoded-Digest, encoded
 content would need to be decoded. The might offer the opportunity for an
 attacker to direct malicious data into a decoder. One possible mitigation would
 be to also provide a Content-Digest or Repr-Digest in the message, allowing for
