@@ -338,7 +338,7 @@ Table of Contents
    The considerations in [DIGEST-FIELDS] apply.
 
    HTTP messages can contain both Content-Encoding and Unencoded-Digest
-   (Section 5).  In order to validate the unencoded-digest, encoded
+   (Section 5).  In order to validate the Unencoded-Digest, encoded
    content would need to be decoded.  The might offer the opportunity
    for an attacker to direct malicious data into a decoder.  One
    possible mitigation would be to also provide a Content-Digest or
