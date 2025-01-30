@@ -178,7 +178,7 @@ will ignore it.
 `Unencoded-Digest` MAY be merged into the header section; see {{Section 6.5.1 of
 HTTP}}.
 
-# The Want-Unencoded-Digest Field
+# The Want-Unencoded-Digest Field {#want-unencoded-digest}
 
 `Want-Unencoded-Digest` is an integrity preference field; see {{Section 4 of
 DIGEST-FIELDS}}. It indicates that the sender would like to receive (via the
@@ -302,7 +302,17 @@ considerations.
 
 # IANA Considerations
 
-This document has no IANA actions (yet)
+Should this document be adopted and achieve working group consensus, IANA is
+asked to update the "Hypertext Transfer Protocol (HTTP) Field Name Registry"
+{{?HTTP=RFC9110}} as shown in the table below:
+
+|-----------------------|-----------|-----------------|--------------------------------------------|
+| Field Name            | Status    | Structured Type | Reference                                  |
+|-----------------------|-----------|-----------------|--------------------------------------------|
+| Unencoded-Digest      | permanent | Dictionary      | {{unencoded-digest}} of this document      |
+| Want-Unencoded-Digest | permanent | Dictionary      | {{want-unencoded-digest}} of this document |
+|-----------------------|-----------|-----------------|--------------------------------------------|
+{: #iana-field-name-table title="Hypertext Transfer Protocol (HTTP) Field Name Registry Update"}
 
 
 --- back
