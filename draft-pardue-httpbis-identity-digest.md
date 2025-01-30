@@ -1,6 +1,6 @@
 ---
-title: "HTTP Identity Digest"
-abbrev: "HTTP Identity Digest"
+title: "HTTP Unencoded Digest"
+abbrev: "HTTP Unencoded Digest"
 category: std
 
 docname: draft-pardue-httpbis-identity-digest-latest
@@ -44,7 +44,7 @@ informative:
 The Repr-Digest and Content-Digest integrity fields are subject to HTTP content
 coding considerations. There are some use cases that benefit from the
 unambiguous exchange of integrity digests of unencoded representation. The
-Identity-Digest and Want-Identity-Digest fields complement existing integrity
+Unencoded-Digest and Want-Unencoded-Digest fields complement existing integrity
 fields for this purpose.
 
 
@@ -94,7 +94,7 @@ unacceptable trade off.
 
 For a variety of reasons, decoding and re-encoding content in order to benefit
 from HTTP integrity fields is not preferable. This specification defines the
-Identity-Digest and Want-Identity-Digest fields to support a simpler validation
+Unencoded-Digest and Want-Unencoded-Digest fields to support a simpler validation
 workflow in some scenarios where content coding is applied. These fields
 complement the other integrity fields defined in {{DIGEST-FIELDS}}.
 
@@ -115,22 +115,22 @@ data", "representation metadata", and "content" in this document are to be
 interpreted as described in {{!HTTP=RFC9110}}.
 
 "Integrity fields" is the collective term for `Content-Digest`, `Repr-Digest`,
-and `Identity-Digest`.
+and `Unencoded-Digest`.
 
 "Integrity preference fields" is the collective term for `Want-Repr-Digest`,
-`Want-Content-Digest`, and `Want-Identity-Digest`.
+`Want-Content-Digest`, and `Want-Unencoded-Digest`.
 
-# The Identity-Digest Field {#identity-digest}
+# The Unencoded-Digest Field {#unencoded-digest}
 
-The `Identity-Digest` HTTP field can be used in requests and responses to
+The `Unencoded-Digest` HTTP field can be used in requests and responses to
 communicate digests that are calculated using a hashing algorithm applied to the
 representation with no content coding ({{Section 8.4.1 of HTTP}}).
 
-Apart from the content coding concerns, `Identity-Digest` behaves similarly
+Apart from the content coding concerns, `Unencoded-Digest` behaves similarly
 to `Repr-Digest` ({{Section 3 of DIGEST-FIELDS}}). In the absence of content
-coding, `Identity-Digest` is identical to `Repr-Digest`.
+coding, `Unencoded-Digest` is identical to `Repr-Digest`.
 
-`Identity-Digest` is a `Dictionary` (see {{Section 3.2 of STRUCTURED-FIELDS}})
+`Unencoded-Digest` is a `Dictionary` (see {{Section 3.2 of STRUCTURED-FIELDS}})
 where each:
 
 * key conveys the hashing algorithm (see {{Section 5 of DIGEST-FIELDS}} used to
@@ -144,7 +144,7 @@ For example:
 ~~~ http-message
 NOTE: '\' line wrapping per RFC 8792
 
-Identity-Digest: \
+Unencoded-Digest: \
   sha-512=:YMAam51Jz/jOATT6/zvHrLVgOYTGFy1d6GJiOHTohq4yP+pgk4vf2aCs\
   yRZOtw8MjkM7iw7yZ/WkppmM44T3qg==:
 ~~~
@@ -158,7 +158,7 @@ support transitions away from weaker algorithms (see
 ~~~ http-message
 NOTE: '\' line wrapping per RFC 8792
 
-Identity-Digest: \
+Unencoded-Digest: \
   sha-256=:d435Qo+nKZ+gLcUHn7GQtQ72hiBVAgqoLsZnZPiTGPk=:,\
   sha-512=:YMAam51Jz/jOATT6/zvHrLVgOYTGFy1d6GJiOHTohq4yP+pgk4vf2aCs\
   yRZOtw8MjkM7iw7yZ/WkppmM44T3qg==:
@@ -174,27 +174,27 @@ A sender MAY send a digest without knowing whether the recipient supports a
 given hashing algorithm. A sender MAY send a digest if it knows the recipient
 will ignore it.
 
-`Identity-Digest` can be sent in a trailer section. In this case,
-`Identity-Digest` MAY be merged into the header section; see {{Section 6.5.1 of
+`Unencoded-Digest` can be sent in a trailer section. In this case,
+`Unencoded-Digest` MAY be merged into the header section; see {{Section 6.5.1 of
 HTTP}}.
 
-# The Want-Identity-Digest Field
+# The Want-Unencoded-Digest Field
 
-`Want-Identity-Digest` is an integrity preference field; see {{Section 4 of
+`Want-Unencoded-Digest` is an integrity preference field; see {{Section 4 of
 DIGEST-FIELDS}}. It indicates that the sender would like to receive (via the
-`Identity-Digest` field) a representation digest on messages associated with the
+`Unencoded-Digest` field) a representation digest on messages associated with the
 request URI and representation metadata where no content coding is applied.
 
-If `Want-Identity-Digest` is used in a response, it indicates that the server
-would like the client to provide the `Identity-Digest` field on future requests.
+If `Want-Unencoded-Digest` is used in a response, it indicates that the server
+would like the client to provide the `Unencoded-Digest` field on future requests.
 
-`Want-Identity-Digest` is only a hint. The receiver of the field can ignore it
-and send an `Identity-Digest` field using any algorithm or omit one entirely. It
+`Want-Unencoded-Digest` is only a hint. The receiver of the field can ignore it
+and send an `Unencoded-Digest` field using any algorithm or omit one entirely. It
 is not a protocol error if preferences are ignored. Applications that use
-`Identity-Digest` and `Want-Identity-Digest` can define expectations or
+`Unencoded-Digest` and `Want-Unencoded-Digest` can define expectations or
 constraints that operate in addition to this specification.
 
-`Want-Identity-Digest` is of type `Dictionary` where each:
+`Want-Unencoded-Digest` is of type `Dictionary` where each:
 
 * key conveys the hashing algorithm;
 * value is an `Integer` ({{Section 3.3.1 of STRUCTURED-FIELDS}}) that conveys an
@@ -205,13 +205,13 @@ constraints that operate in addition to this specification.
 Examples:
 
 ~~~ http-message
-Want-Identity-Digest: sha-256=1
-Want-Identity-Digest: sha-512=3, sha-256=10, unixsum=0
+Want-Unencoded-Digest: sha-256=1
+Want-Unencoded-Digest: sha-512=3, sha-256=10, unixsum=0
 ~~~
 
-# Messages containing both Identity-Digest and Content-Encoding
+# Messages containing both Unencoded-Digest and Content-Encoding
 
-Digests delivered through `Identity-Digest` apply to the unencoded representation. If a message is
+Digests delivered through `Unencoded-Digest` apply to the unencoded representation. If a message is
 received with content coding, a recipient needs to decode the message in order
 to calculate the digest that can subsequently be used for validation. If
 multiple content codings are applied, the recipient needs to decode all
@@ -236,7 +236,7 @@ Accept-Encoding: gzip
 {: title="GET request with content negotiation"}
 
 The server responds with the full GZIP-encoded representation. The `Repr-Digest`
-and `Identity-Digest` therefore differ.
+and `Unencoded-Digest` therefore differ.
 
 ~~~ http-message
 NOTE: '\' line wrapping per RFC 8792
@@ -245,7 +245,7 @@ HTTP/1.1 200 OK
 Content-Encoding: gzip
 Repr-Digest: \
   sha-256=:XyjvEuFb1P5rqc2le3vQm7M96DwZhvmOwqHLu2xVpY4=:
-Identity-Digest: \
+Unencoded-Digest: \
   sha-256=:5Bv3NIx05BPnh0jMph6v1RJ5Q7kl9LKMtQxmvc9+Z7Y=:
 
 1f 8b 08 00 79 1f 08 64 00 ff
@@ -271,7 +271,7 @@ Range: bytes=0-10
 The server responds with a 206 Partial Content response using GZIP encoding, it
 has three different Integrity fields. The `Content-Digest` relates to the
 response message content that can be used to validate the integrity of the
-received part. `Repr-Digest` and `Identity-Digest` can be used later once the
+received part. `Repr-Digest` and `Unencoded-Digest` can be used later once the
 entire object is reconstructed. The choice of which to use is left to the
 application that would consider a range of factors outside the scope of
 this document.
@@ -286,7 +286,7 @@ Content-Digest: \
   sha-256=:SotB7Pa5A7iHSBdh9mg1Ev/ktAzrxU4Z8ldcCIUyfI4=:
 Repr-Digest: \
   sha-256=:XyjvEuFb1P5rqc2le3vQm7M96DwZhvmOwqHLu2xVpY4=:
-Identity-Digest: \
+Unencoded-Digest: \
   sha-256=:5Bv3NIx05BPnh0jMph6v1RJ5Q7kl9LKMtQxmvc9+Z7Y=:
 
 1f 8b 08 00 79 1f 08 64 00 ff
