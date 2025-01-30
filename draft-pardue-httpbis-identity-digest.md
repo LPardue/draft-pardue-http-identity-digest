@@ -52,7 +52,7 @@ fields for this purpose.
 
 # Introduction
 
-The `Repr-Digest` and `Content-Digest` integrity fields integrity fields defined in
+The `Repr-Digest` and `Content-Digest` integrity fields defined in
 {{!DIGEST-FIELDS=RFC9530}} are suitable for a range of use cases. However,
 because the fields are subject to HTTP content coding considerations, it is
 difficult to support use cases that could benefit from the exchange of integrity
@@ -133,7 +133,7 @@ coding, `Unencoded-Digest` is identical to `Repr-Digest`.
 `Unencoded-Digest` is a `Dictionary` (see {{Section 3.2 of STRUCTURED-FIELDS}})
 where each:
 
-* key conveys the hashing algorithm (see {{Section 5 of DIGEST-FIELDS}} used to
+* key conveys the hashing algorithm (see {{Section 5 of DIGEST-FIELDS}}) used to
   compute the digest;
 * value is a `Byte Sequence` ({{Section 3.3.5 of STRUCTURED-FIELDS}}), that
   conveys an encoded version of the byte output produced by the digest
