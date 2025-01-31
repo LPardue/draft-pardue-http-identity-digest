@@ -5,8 +5,8 @@
 HTTP                                                           L. Pardue
 Internet-Draft                                                Cloudflare
 Intended status: Standards Track                                 M. West
-Expires: 3 August 2025                                            Google
-                                                         30 January 2025
+Expires: 4 August 2025                                            Google
+                                                         31 January 2025
 
 
                          HTTP Unencoded Digest
@@ -53,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 August 2025.
+   This Internet-Draft will expire on 4 August 2025.
 
 Copyright Notice
 
@@ -340,7 +340,23 @@ Table of Contents
 
 8.  IANA Considerations
 
-   This document has no IANA actions (yet)
+   Should this document be adopted and achieve working group consensus,
+   IANA is asked to update the "Hypertext Transfer Protocol (HTTP) Field
+   Name Registry" [HTTP] as shown in the table below:
+
+    +=======================+===========+============+===============+
+    | Field Name            | Status    | Structured | Reference     |
+    |                       |           | Type       |               |
+    +=======================+===========+============+===============+
+    | Unencoded-Digest      | permanent | Dictionary | Section 3 of  |
+    |                       |           |            | this document |
+    +-----------------------+-----------+------------+---------------+
+    | Want-Unencoded-Digest | permanent | Dictionary | Section 4 of  |
+    |                       |           |            | this document |
+    +-----------------------+-----------+------------+---------------+
+
+          Table 1: Hypertext Transfer Protocol (HTTP) Field Name
+                             Registry Update
 
 9.  Normative References
 
