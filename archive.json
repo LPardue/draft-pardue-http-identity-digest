@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-30T00:59:29.810384+00:00",
+  "timestamp": "2025-02-02T01:03:48.920586+00:00",
   "repo": "LPardue/draft-pardue-http-identity-digest",
   "labels": [
     {
@@ -79,15 +79,15 @@
       "id": "I_kwDOJGwozs6jjI0j",
       "title": "Bikeshed: field naming",
       "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/issues/10",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "LPardue",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "When draft -00 was published and solicited on the WG mailing group list, Roy Fielding [replied](https://lists.w3.org/Archives/Public/ietf-http-wg/2023JanMar/0214.html) with the following wrt the field names `Identity-Digest` and `Want-Identity-Digest`:\r\n\r\n> This misuses the term identity, which was a poor use of a word in the\r\n> first place to refer to a transformation that doesn't change the content.\r\n> In any case, \"identity\" refers to the coding, not the content.\r\n> \r\n> It doesn't help to use the same term for two different things in HTTP.\r\n> \r\n> If we want to send this field in a message with Content-Encoding applied,\r\n> then it would be easier understood as Decoded-Digest or Digest-After-Decoding\r\n> or Want-Unencoded-Digest (or maybe just Digested and WUD -- I hate\r\n> long field names).\r\n\r\nI don't have much strong opinion here. I'm not stuck on `Identity-Digest`/`Want-Identity-Digest`. I'm not a huge fan of the suggestions, primarily because it appears to suggest breaking the symmetry that we have with `Repr-Digest`/`Want-Repr-Digest` and `Content-Digest`/`Want-Content-Digest`. Some of them also step awat from the `-Digest` suffix, which seems to be different jsut for the sake of it\r\n\r\nIn the intervening 2 years, we've picked up a concrete use case with signed SRI, and we'd need to coordinate any name changes with that document. Ideally we'd do the rename jsut once to avoid downstreams getting confused.\r\n\r\nSummarizing the proposals so far (list to be kept updated)\r\n\r\n# Integrity field name\r\n\r\n* Identity-Digest\r\n* Decoded-Digest\r\n* Digest-After-Decoding\r\n* Unencoded-Digest\r\n* Digested\r\n\r\n# Integrity preference field name\r\n\r\n* Want-Identity-Digest\r\n* Want-Unencoded-Digest\r\n* WUD\r\n\r\n\r\nHaving reread the I-D and the email, I might lean towards Unencoded-Digest because a) the I-D already uses the word unencoded a few time and b) uncoded is  less suggestive that something is being undone than `Decoded` (I find it weird to consider decoding something that doesn't have any coding).\r\n\r\nBikeshed away\r\n",
       "createdAt": "2024-12-17T04:25:17Z",
-      "updatedAt": "2025-01-06T10:17:16Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-31T12:57:37Z",
+      "closedAt": "2025-01-31T12:57:35Z",
       "comments": [
         {
           "author": "mikewest",
@@ -95,6 +95,20 @@
           "body": "I'm fine with `Unencoded-Digest`. Names are hard: each is wrong in different ways, and `Unencoded-Digest` might well be the least worst!\r\n\r\nThat said, \"unencoded\" leaves a little ambiguity with regard to what unencoded content is being digested. The actual message content, a la `Content-Digest`? The entire representation data, a la `Repr-Digest`?\r\n\r\nI wonder if something like `Resource-Digest` would give more clarity about the digest's application to the [resource](https://www.rfc-editor.org/rfc/rfc9110.html#name-resources) itself, rather than a specific representation of that thing in a negotiated response?",
           "createdAt": "2025-01-06T10:17:14Z",
           "updatedAt": "2025-01-06T10:17:14Z"
+        },
+        {
+          "author": "LPardue",
+          "authorAssociation": "OWNER",
+          "body": "@mikewest shall we close this now after #16 was merged? ",
+          "createdAt": "2025-01-30T22:11:52Z",
+          "updatedAt": "2025-01-30T22:11:52Z"
+        },
+        {
+          "author": "mikewest",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yes, we shall. Thanks!",
+          "createdAt": "2025-01-31T12:57:35Z",
+          "updatedAt": "2025-01-31T12:57:35Z"
         }
       ]
     },
@@ -522,6 +536,216 @@
           "body": "",
           "createdAt": "2024-12-23T03:59:10Z",
           "updatedAt": "2024-12-23T03:59:10Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "id": "PR_kwDOJGwozs6JhdQA",
+      "title": "Rename to `Unencoded-Digest`.",
+      "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/pull/16",
+      "state": "MERGED",
+      "author": "mikewest",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "LPardue"
+      ],
+      "labels": [],
+      "body": "After conversation in LPardue/draft-pardue-http-identity-digest#10, this PR\r\nrenames `Identity-Digest` to `Unencoded-Digest`, which hopefully improves\r\nclarity and precision.",
+      "createdAt": "2025-01-30T16:17:45Z",
+      "updatedAt": "2025-01-30T17:25:30Z",
+      "baseRepository": "LPardue/draft-pardue-http-identity-digest",
+      "baseRefName": "main",
+      "baseRefOid": "55261de1991b49785531c8fab459ae7695bc8762",
+      "headRepository": "LPardue/draft-pardue-http-identity-digest",
+      "headRefName": "unencoded",
+      "headRefOid": "2621ac7054151b1af281657fe41f48962b6f8dfb",
+      "closedAt": "2025-01-30T17:25:26Z",
+      "mergedAt": "2025-01-30T17:25:26Z",
+      "mergedBy": "mikewest",
+      "mergeCommit": {
+        "oid": "e6cae2084f2a8d9f8227e224b38d0589c10cb99d"
+      },
+      "comments": [
+        {
+          "author": "mikewest",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hey @LPardue: simplest possible PR. It doesn't remove the mention of the `identity` content-encoding from the introduction. I think we could probably remove that paragraph without impacting the text's flow or meaning, but it doesn't hurt anything to keep it around, so I kept this PR mostly mechanical. I also didn't change the document slug, just to reduce churn.\r\n\r\nWDYT?",
+          "createdAt": "2025-01-30T16:19:50Z",
+          "updatedAt": "2025-01-30T16:19:50Z"
+        },
+        {
+          "author": "mikewest",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Ok. Then I'll land this and wander off to update SRI-related docs and etc. Thanks!",
+          "createdAt": "2025-01-30T17:25:10Z",
+          "updatedAt": "2025-01-30T17:25:10Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJGwozs6aC6d5",
+          "commit": {
+            "abbreviatedOid": "2621ac7"
+          },
+          "author": "LPardue",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "I read the rendered version of this PR and looks to maintain good logical coherency. \r\n\r\nAgree that a future editorial pass can trim down the introduction, but until adoption I think it helps to keep the rationale for the protosal in a single document.\r\n\r\nKeeping the slugs the same certainly helps continuity. We can change them as part of a formal WG adoption. ",
+          "createdAt": "2025-01-30T16:43:31Z",
+          "updatedAt": "2025-01-30T16:43:31Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "id": "PR_kwDOJGwozs6JjjUV",
+      "title": "fix some typos",
+      "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/pull/17",
+      "state": "MERGED",
+      "author": "LPardue",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-01-30T21:43:34Z",
+      "updatedAt": "2025-01-31T15:26:07Z",
+      "baseRepository": "LPardue/draft-pardue-http-identity-digest",
+      "baseRefName": "main",
+      "baseRefOid": "e6cae2084f2a8d9f8227e224b38d0589c10cb99d",
+      "headRepository": "LPardue/draft-pardue-http-identity-digest",
+      "headRefName": "typos-1",
+      "headRefOid": "b1ae75c0c1183ac1004342dd6da5ebf18757218a",
+      "closedAt": "2025-01-31T15:26:05Z",
+      "mergedAt": "2025-01-31T15:26:05Z",
+      "mergedBy": "LPardue",
+      "mergeCommit": {
+        "oid": "f68ead3016cc007805bf0039dfd89a25fac7a998"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJGwozs6aLZE_",
+          "commit": {
+            "abbreviatedOid": "b1ae75c"
+          },
+          "author": "mikewest",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM!",
+          "createdAt": "2025-01-31T13:05:37Z",
+          "updatedAt": "2025-01-31T13:05:37Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "id": "PR_kwDOJGwozs6JjoDx",
+      "title": "Requiring processing presents a new security consideration",
+      "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/pull/18",
+      "state": "OPEN",
+      "author": "LPardue",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "I'm not convinced if this is a credible threat or not but it seems worthwhile to highlight since the unencoded digest requires different handling that we talked about in RFC 9530.\r\n\r\nAs always, signing things reduces the vectors where content substitution might happen.",
+      "createdAt": "2025-01-30T21:59:04Z",
+      "updatedAt": "2025-01-31T13:26:15Z",
+      "baseRepository": "LPardue/draft-pardue-http-identity-digest",
+      "baseRefName": "main",
+      "baseRefOid": "e6cae2084f2a8d9f8227e224b38d0589c10cb99d",
+      "headRepository": "LPardue/draft-pardue-http-identity-digest",
+      "headRefName": "a-new-security-consideration",
+      "headRefOid": "00a8a06cce3460dd9522933fa6fb4c0b32836801",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJGwozs6aLYKX",
+          "commit": {
+            "abbreviatedOid": "00a8a06"
+          },
+          "author": "mikewest",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM (though this doesn't seem like a big deal :) )",
+          "createdAt": "2025-01-31T13:04:58Z",
+          "updatedAt": "2025-01-31T13:05:17Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "This assumes that the attacker can control the (encoded) body of the response, but not the headers, right? It might be worth specifying that as the threat model here.\r\n\r\nThis doesn't seem like an incredibly plausible attack vector, but it's certainly reasonable to point out the ways in which the one header can defend against an attack that the other couldn't.",
+              "createdAt": "2025-01-31T13:04:59Z",
+              "updatedAt": "2025-01-31T13:05:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJGwozs6aLs4T",
+          "commit": {
+            "abbreviatedOid": "00a8a06"
+          },
+          "author": "LPardue",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-31T13:26:15Z",
+          "updatedAt": "2025-01-31T13:26:15Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "Yes your right.\r\n\r\nThe security considerations in rfc 9530 capture the entire shape of threat model, I was trying to not repeat that text and just highlight the difference introduced. Let me see if I can wordsmith a little to find a balance.",
+              "createdAt": "2025-01-31T13:26:15Z",
+              "updatedAt": "2025-01-31T13:26:15Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "id": "PR_kwDOJGwozs6Jjrjr",
+      "title": "Add speculative IANA considerations",
+      "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/pull/19",
+      "state": "MERGED",
+      "author": "LPardue",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "It too early to be seeking allocation in IANA (especially because we expect a chance of name churn) but personally I like having fewer known TODOs in the document.",
+      "createdAt": "2025-01-30T22:10:48Z",
+      "updatedAt": "2025-01-31T15:25:55Z",
+      "baseRepository": "LPardue/draft-pardue-http-identity-digest",
+      "baseRefName": "main",
+      "baseRefOid": "e6cae2084f2a8d9f8227e224b38d0589c10cb99d",
+      "headRepository": "LPardue/draft-pardue-http-identity-digest",
+      "headRefName": "iana-stuff",
+      "headRefOid": "ab8f916779c852fb0757a3713d607cbdf378dc54",
+      "closedAt": "2025-01-31T15:25:52Z",
+      "mergedAt": "2025-01-31T15:25:52Z",
+      "mergedBy": "LPardue",
+      "mergeCommit": {
+        "oid": "981bb1011f4b1350c41bcb3f453e353c8d27ec5d"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJGwozs6aLOFp",
+          "commit": {
+            "abbreviatedOid": "ab8f916"
+          },
+          "author": "mikewest",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM, thanks!",
+          "createdAt": "2025-01-31T12:58:05Z",
+          "updatedAt": "2025-01-31T12:58:05Z",
           "comments": []
         }
       ]
