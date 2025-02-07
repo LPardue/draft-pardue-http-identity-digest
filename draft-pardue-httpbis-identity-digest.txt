@@ -5,8 +5,8 @@
 HTTP                                                           L. Pardue
 Internet-Draft                                                Cloudflare
 Intended status: Standards Track                                 M. West
-Expires: 4 August 2025                                            Google
-                                                         31 January 2025
+Expires: 11 August 2025                                           Google
+                                                         7 February 2025
 
 
                          HTTP Unencoded Digest
@@ -53,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 August 2025.
+   This Internet-Draft will expire on 11 August 2025.
 
 Copyright Notice
 
@@ -334,8 +334,19 @@ Table of Contents
 
 7.  Security Considerations
 
-   The considerations in [DIGEST-FIELDS] apply.  There are no known
-   additional considerations.
+   All the same considerations documented in [DIGEST-FIELDS] apply.
+
+   This document introduces a further consideration related to the
+   process of validation when an HTTP message contains both Content-
+   Encoding and Unencoded-Digest (Section 5).  In order to validate the
+   Unencoded-Digest, encoded content needs to be decoded.  This provides
+   an opportunity for an attacker to direct malicious data into a
+   decoder.  One possible mitigation would be to also provide a Content-
+   Digest or Repr-Digest in the message, allowing for validation of the
+   received bytes before further processing.  An attacker that can
+   substitute various parts of an HTTP message presents several risks,
+   Sections 6.1, 6.2 and 6.3 of [DIGEST-FIELDS] describe relevant
+   considerations and mitigations.
 
 8.  IANA Considerations
 
