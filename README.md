@@ -1,6 +1,6 @@
-# HTTP Identity Digest
+# HTTP Unencoded-Digest
 
-This is the working area for the individual Internet-Draft, "HTTP Identity Digest".
+This is the working area for the individual Internet-Draft, "HTTP Unencoded-Digest".
 
 * [Editor's Copy](https://LPardue.github.io/draft-pardue-http-identity-digest/#go.draft-pardue-httpbis-identity-digest.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-pardue-httpbis-identity-digest)
