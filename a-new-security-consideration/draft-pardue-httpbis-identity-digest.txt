@@ -5,8 +5,8 @@
 HTTP                                                           L. Pardue
 Internet-Draft                                                Cloudflare
 Intended status: Standards Track                                 M. West
-Expires: 3 August 2025                                            Google
-                                                         30 January 2025
+Expires: 11 August 2025                                           Google
+                                                         7 February 2025
 
 
                          HTTP Unencoded Digest
@@ -53,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 August 2025.
+   This Internet-Draft will expire on 11 August 2025.
 
 Copyright Notice
 
@@ -85,12 +85,11 @@ Table of Contents
 
 1.  Introduction
 
-   The Repr-Digest and Content-Digest integrity fields integrity fields
-   defined in [DIGEST-FIELDS] are suitable for a range of use cases.
-   However, because the fields are subject to HTTP content coding
-   considerations, it is difficult to support use cases that could
-   benefit from the exchange of integrity digests of the unencoded
-   representation.
+   The Repr-Digest and Content-Digest integrity fields defined in
+   [DIGEST-FIELDS] are suitable for a range of use cases.  However,
+   because the fields are subject to HTTP content coding considerations,
+   it is difficult to support use cases that could benefit from the
+   exchange of integrity digests of the unencoded representation.
 
    As a simple example, an application using HTTP might be presented
    with request or response representation data that has been
@@ -177,7 +176,7 @@ Table of Contents
    [STRUCTURED-FIELDS]) where each:
 
    *  key conveys the hashing algorithm (see Section 5 of
-      [DIGEST-FIELDS] used to compute the digest;
+      [DIGEST-FIELDS]) used to compute the digest;
 
    *  value is a Byte Sequence (Section 3.3.5 of [STRUCTURED-FIELDS]),
       that conveys an encoded version of the byte output produced by the
@@ -335,21 +334,39 @@ Table of Contents
 
 7.  Security Considerations
 
-   The considerations in [DIGEST-FIELDS] apply.
+   All the same considerations documented in [DIGEST-FIELDS] apply.
 
-   HTTP messages can contain both Content-Encoding and Unencoded-Digest
-   (Section 5).  In order to validate the Unencoded-Digest, encoded
-   content would need to be decoded.  The might offer the opportunity
-   for an attacker to direct malicious data into a decoder.  One
-   possible mitigation would be to also provide a Content-Digest or
-   Repr-Digest in the message, allowing for validation of the received
-   bytes before further processing.  Furthermore, the use of signatures
-   as explained in Section 6.3 of [DIGEST-FIELDS] can address data
-   substitution attacks.
+   This document introduces a further consideration related to the
+   process of validation when an HTTP message contains both Content-
+   Encoding and Unencoded-Digest (Section 5).  In order to validate the
+   Unencoded-Digest, encoded content needs to be decoded.  This provides
+   an opportunity for an attacker to direct malicious data into a
+   decoder.  One possible mitigation would be to also provide a Content-
+   Digest or Repr-Digest in the message, allowing for validation of the
+   received bytes before further processing.  An attacker that can
+   substitute various parts of an HTTP message presents several risks,
+   Sections 6.1, 6.2 and 6.3 of [DIGEST-FIELDS] describe relevant
+   considerations and mitigations.
 
 8.  IANA Considerations
 
-   This document has no IANA actions (yet)
+   Should this document be adopted and achieve working group consensus,
+   IANA is asked to update the "Hypertext Transfer Protocol (HTTP) Field
+   Name Registry" [HTTP] as shown in the table below:
+
+    +=======================+===========+============+===============+
+    | Field Name            | Status    | Structured | Reference     |
+    |                       |           | Type       |               |
+    +=======================+===========+============+===============+
+    | Unencoded-Digest      | permanent | Dictionary | Section 3 of  |
+    |                       |           |            | this document |
+    +-----------------------+-----------+------------+---------------+
+    | Want-Unencoded-Digest | permanent | Dictionary | Section 4 of  |
+    |                       |           |            | this document |
+    +-----------------------+-----------+------------+---------------+
+
+          Table 1: Hypertext Transfer Protocol (HTTP) Field Name
+                             Registry Update
 
 9.  Normative References
 
