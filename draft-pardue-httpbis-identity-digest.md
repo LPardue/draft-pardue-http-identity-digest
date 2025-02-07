@@ -296,16 +296,18 @@ Unencoded-Digest: \
 
 # Security Considerations
 
-The considerations in {{DIGEST-FIELDS}} apply.
+All the same considerations documented in {{DIGEST-FIELDS}} apply.
 
-HTTP messages can contain both Content-Encoding and Unencoded-Digest
-({{encoding-and-unencoded}}). In order to validate the Unencoded-Digest, encoded
-content would need to be decoded. The might offer the opportunity for an
-attacker to direct malicious data into a decoder. One possible mitigation would
-be to also provide a Content-Digest or Repr-Digest in the message, allowing for
-validation of the received bytes before further processing. Furthermore, the use
-of signatures as explained in {{Section 6.3 of DIGEST-FIELDS}} can address data
-substitution attacks.
+This document introduces a further consideration related to the process of
+validation when an HTTP message contains both Content-Encoding and
+Unencoded-Digest ({{encoding-and-unencoded}}). In order to validate the
+Unencoded-Digest, encoded content needs to be decoded. This provides an
+opportunity for an attacker to direct malicious data into a decoder. One
+possible mitigation would be to also provide a Content-Digest or Repr-Digest in
+the message, allowing for validation of the received bytes before further
+processing. An attacker that can substitute various parts of an HTTP message
+presents several risks, {{Sections 6.1, 6.2 and 6.3 of DIGEST-FIELDS}}
+describe relevant considerations and mitigations.
 
 
 # IANA Considerations
