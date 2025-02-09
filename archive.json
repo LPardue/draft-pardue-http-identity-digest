@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-06T01:01:45.340682+00:00",
+  "timestamp": "2025-02-09T01:04:51.388409+00:00",
   "repo": "LPardue/draft-pardue-http-identity-digest",
   "labels": [
     {
@@ -646,24 +646,26 @@
       "id": "PR_kwDOJGwozs6JjoDx",
       "title": "Requiring processing presents a new security consideration",
       "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/pull/18",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "LPardue",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "I'm not convinced if this is a credible threat or not but it seems worthwhile to highlight since the unencoded digest requires different handling that we talked about in RFC 9530.\r\n\r\nAs always, signing things reduces the vectors where content substitution might happen.",
       "createdAt": "2025-01-30T21:59:04Z",
-      "updatedAt": "2025-01-31T13:26:15Z",
+      "updatedAt": "2025-02-07T17:10:57Z",
       "baseRepository": "LPardue/draft-pardue-http-identity-digest",
       "baseRefName": "main",
-      "baseRefOid": "e6cae2084f2a8d9f8227e224b38d0589c10cb99d",
+      "baseRefOid": "f68ead3016cc007805bf0039dfd89a25fac7a998",
       "headRepository": "LPardue/draft-pardue-http-identity-digest",
       "headRefName": "a-new-security-consideration",
-      "headRefOid": "00a8a06cce3460dd9522933fa6fb4c0b32836801",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "cc1ab2e7ef3c09620f88c4b1e94e95fdccf0134f",
+      "closedAt": "2025-02-07T17:10:52Z",
+      "mergedAt": "2025-02-07T17:10:52Z",
+      "mergedBy": "LPardue",
+      "mergeCommit": {
+        "oid": "810f75b5e81a5077ae15fbf6f8c03222c5e308bd"
+      },
       "comments": [],
       "reviews": [
         {
