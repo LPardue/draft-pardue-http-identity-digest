@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-18T01:01:50.877521+00:00",
+  "timestamp": "2025-02-20T01:02:26.949478+00:00",
   "repo": "LPardue/draft-pardue-http-identity-digest",
   "labels": [
     {
@@ -143,6 +143,30 @@
       "updatedAt": "2024-12-17T23:03:52Z",
       "closedAt": "2024-12-17T23:03:52Z",
       "comments": []
+    },
+    {
+      "number": 20,
+      "id": "I_kwDOJGwozs6qiF6U",
+      "title": "Unable to reproduce example",
+      "url": "https://github.com/LPardue/draft-pardue-http-identity-digest/issues/20",
+      "state": "OPEN",
+      "author": "Acconut",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I tried to reproduce the digest from the example in Section 6 to double check my understanding of content, representation, and unencoded representation. Here's a quick Node.js script to demonstrate what I did:\n\n```js\nconst crypto = require('crypto')\nconst zlib = require('zlib')\nconst assert = require('assert')\n\n// Representation from figure 2\nconst repr = Buffer.from([0x1f, 0x8b, 0x08, 0x00, 0x79, 0x1f, 0x08, 0x64, 0x00, 0xff, 0x73, 0xcc, 0x53, 0x28, 0xcd, 0x4b, 0xad, 0x48, 0x4e, 0x2d, 0x28, 0xc9, 0xcc, 0xcf, 0x4b, 0xcc, 0x51, 0x28, 0x2e, 0x29, 0xca, 0xcc, 0x4b, 0xe7, 0x02, 0x00, 0x7e, 0xaf, 0x07, 0x44, 0x18, 0x00, 0x00, 0x00])\n\n// Decode the representation\nconst unencoded = zlib.gunzipSync(repr).toString('utf8')\nassert.equal(unencoded, 'An unexceptional string\\n') // ok\n\n// Check Unencoded-Digest\nconst unencodedDigest = crypto.createHash('sha256').update(unencoded).digest('base64')\nassert.equal(unencodedDigest, '5Bv3NIx05BPnh0jMph6v1RJ5Q7kl9LKMtQxmvc9+Z7Y=') // ok\n\n// Check Content-Digest of partial response\nconst partialContent = repr.subarray(0, 10)\nconst contentDigest = crypto.createHash('sha256').update(partialContent).digest('base64')\nassert.equal(contentDigest, 'SotB7Pa5A7iHSBdh9mg1Ev/ktAzrxU4Z8ldcCIUyfI4=') // ok\n\n// Check Repr-Digest\nconst reprDigest = crypto.createHash('sha256').update(repr).digest('base64')\nassert.equal(reprDigest, 'XyjvEuFb1P5rqc2le3vQm7M96DwZhvmOwqHLu2xVpY4=') // failure\n```\n\nThe unencoded representation, Unencoded-Digest, and Content-Digest are the same as in the draft, but I cannot get the same Repr-Digest. It produces `kwcdt3RBGcsLaj7QSz9AW8MuwJaLjOJqUU/jKixF2oU=` instead of `XyjvEuFb1P5rqc2le3vQm7M96DwZhvmOwqHLu2xVpY4=` from the draft.\n\nThis might just be a mistake on my end and I would greatly appreciate if you can help me reproduce the Repr-Digest.\n\nThat being said, it might help readers understand the document better if the explicit values that go into the hashing algorithms are shown. For example:\n\n```\nUnencoded-Digest = sha256('An unexceptional string\\n')\nContent-Digest = sha256([0x1f, 0x8b, 0x08, 0x00, 0x79, 0x1f, 0x08, 0x64, 0x00, 0xff])\nRepr-Digest = sha256(???)\n```",
+      "createdAt": "2025-02-18T17:02:31Z",
+      "updatedAt": "2025-02-18T17:30:56Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "LPardue",
+          "authorAssociation": "OWNER",
+          "body": "Thanks for the report, I'll Tey yo check my end too.\n\nEarlier drafts of the Digest Headers spec pre-RFC had the \"working out\" in an appendix. I think adding that to this draft is a good idea.",
+          "createdAt": "2025-02-18T17:30:55Z",
+          "updatedAt": "2025-02-18T17:30:55Z"
+        }
+      ]
     }
   ],
   "pulls": [
